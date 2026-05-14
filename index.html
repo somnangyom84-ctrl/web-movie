@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naga Flix | Cambodia Streaming 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bayon&family=Black+Ops+One&family=Fasthand&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Supermercado+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+        :root { --gold: #facc15; }
+        
+        /* Theme Variables */
+        .light-theme {
+            --bg-color: #ffffff;
+            --text-color: #09090b;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: #f4f4f5;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --input-bg: #f4f4f5;
+            --footer-bg: #f4f4f5;
+        }
+
+        .dark-theme {
+            --bg-color: #09090b;
+            --text-color: #ffffff;
+            --nav-bg: rgba(0, 0, 0, 0.8);
+            --card-bg: #18181b;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --input-bg: #18181b;
+            --footer-bg: #000000;
+        }
+
+        body { background-color: var(--bg-color); color: var(--text-color); transition: background-color 0.3s ease, color 0.3s ease; }
+        nav { background-color: var(--nav-bg) !important; border-color: var(--border-color) !important; }
+        .movie-card .bg-zinc-900 { background-color: var(--card-bg) !important; }
+        .owner-card, .bg-zinc-950, .bg-zinc-900\/50 { background-color: var(--card-bg) !important; border-color: var(--border-color) !important; }
+        input, textarea { background-color: var(--input-bg) !important; border-color: var(--border-color) !important; color: var(--text-color) !important; }
+        footer { background-color: var(--footer-bg) !important; border-color: var(--border-color) !important; }
+        .nav-link { color: var(--text-color) !important; opacity: 0.7; }
+        .nav-link:hover { opacity: 1; }
+
+        .tail-container {  font-family: "Roboto", sans-serif; }
+        .logo-font { font-family: "Supermercado One", sans-serif; }
+        .hero-bg { background-size: cover; background-position: center; transition: all 0.8s ease; }
+        .movie-card { transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1); }
+        .movie-card:hover { transform: scale(1.08) translateY(-8px); z-index: 10; }
+        .nav-link { position: relative; }
+        .nav-link:after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0; background-color: #facc15; transition: width 0.3s ease; }
+        .nav-link:hover:after { width: 100%; }
+        .gold-gradient { background: linear-gradient(90deg, #facc15, #fcd34d, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .banner-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(9, 9, 11, 1)); }
+        .owner-card:hover img { transform: scale(1.1); }
+        .horizontal-scroll::-webkit-scrollbar { height: 6px; }
+        
+        .horizontal-scroll::-webkit-scrollbar-track { background: #18181b; }
+        .horizontal-scroll::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
+    </style>
+</head>
+<body class="tail-container bg-zinc-950 text-white overflow-x-hidden ">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <!-- LOGO IMAGE -->
+                <a href="#" class="flex items-center gap-3 transform active:scale-95 active:opacity-80 transition-all duration-200" >
+                    <img src="image.png" alt="Logo" class="w-10 h-10  rounded-full flex items-center justify-center shadow-lg shadow-amber-50/50" >
+                    <div class="hidden sm:block " >
+                        <span class="logo-font text-4xl font-bold tracking-tighter gold-gradient" >Naga</span>
+                        <span class="logo-font text-2xl font-bold tracking-tighter text-white"  >Flix</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-x-8 text-sm font-medium">
+                <a href="#" class="nav-link text-white">Home</a>
+                <a href="#trending" class="nav-link text-zinc-400 hover:text-white">Trailers</a>
+                <a href="#movies" class="nav-link text-zinc-400 hover:text-white">Movies</a>
+                <a href="#owner" class="nav-link text-zinc-400 hover:text-white">Meet Owner</a>
+            </div>
+
+            <!-- SEARCH BAR -->
+            <div class="hidden md:flex items-center flex-1 max-w-md mx-8">
+                <div class="relative w-full group">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-amber-400 transition-colors"></i>
+                    <input type="text" 
+                           id="movie-search"
+                           onkeyup="handleSearch(this.value)"
+                           placeholder="Search movies, trailers..." 
+                           class="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-2.5 pl-11 pr-4 text-sm text-white focus:border-amber-400/50 focus:bg-zinc-900 outline-none transition-all placeholder:text-zinc-600">
+                </div>
+            </div>
+
+            <div id="auth-ui-container" class="flex items-center gap-x-5">
+                <!-- THEME TOGGLE -->
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-zinc-800/50 flex items-center justify-center text-amber-400 hover:bg-zinc-800 transition-all border border-white/10" title="Toggle Day/Dark Mode">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+                <button id="nav-signin-btn" onclick="openAuthModal('signin')" class="bg-amber-400 hover:bg-amber-300 text-black px-6 py-2 rounded-xl text-sm font-bold transition-all">Sign In</button>
+                <div id="nav-profile-ui" class="hidden relative">
+                    <button onclick="toggleProfileDropdown()" class="w-9 h-9 rounded-full overflow-hidden border-2 border-amber-400"><img src="./image2.png" class="w-full h-full object-cover"></button>
+                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl py-2 shadow-2xl">
+                        <button onclick="handleLogout()" class="w-full text-left px-4 py-2 hover:bg-zinc-800 text-red-400 text-sm">Sign Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div id="hero-section" class="relative h-screen">
+        <div id="hero-bg" class="hero-bg absolute inset-0 flex items-center transition-all duration-1000" style="background-image: url('https://scontent.fpnh18-1.fna.fbcdn.net/v/t39.30808-6/694973536_977506471687129_8989255514275114639_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEJttkVYyQ-BmXq22Iz-FUspdp8RI1UGrGl2nxEjVQasZqoxNIHwVuoQJ6UFCSaigpbJyUssdZHSuwOVLtw9Gk-&_nc_ohc=deZZLvj1kK4Q7kNvwHc2rWS&_nc_oc=Adp-9UtJWrjzu1Xfjs_Q3JYmxLMYsKn8eYShYn3YXAgFuGYBpehZpMsqz96wwakFbgM&_nc_zt=23&_nc_ht=scontent.fpnh18-1.fna&_nc_gid=bPaKeQL__PtYOJTVXhIXrA&_nc_ss=7b2a8&oh=00_Af71EKdJEBFBqnlMaWAfqRCh-t7LzFtWboSXEtJPw9b4tg&oe=6A0B8F48')">
+            <div class="banner-overlay absolute inset-0"></div>
+            <div class="relative z-10 max-w-2xl px-8 md:ml-12 pt-20">
+                <span class="bg-amber-400 text-black text-xs font-bold px-3 py-1 rounded mb-4 inline-block">FEATURED 2026</span>
+                <h1 id="hero-title" class="text-6xl md:text-7xl font-bold logo-font tracking-tighter mb-4" style='font-family: "Fasthand", cursive;'>សត្រូវព្រាយ</h1>
+                <p id="hero-desc" class="text-zinc-300 max-w-md mb-8 text-lg">Experience the legendary tale of Cambodia's last guardian. Exclusive 4K Trailer available now.</p>
+                <div class="flex flex-wrap gap-4">
+                    <button id="hero-play-btn" onclick="openVideo('https://www.youtube.com/embed/00rW1_twWhI')" class="bg-white hover:bg-zinc-200 text-black font-bold px-8 py-4 rounded-xl flex items-center gap-3 transform active:scale-95 transition-all">
+                        <i class="fa-solid fa-play"></i> Watch Trailer
+                    </button>
+                    <button onclick="reloadHero()" class="bg-zinc-800/50 hover:bg-zinc-800 text-white border border-white/10 px-6 py-4 rounded-xl flex items-center gap-3 transform active:scale-95 transition-all backdrop-blur-sm">
+                        <i class="fa-solid fa-rotate-right"></i> Reload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOVIE ROWS (TRAILERS) -->
+    <div id="trending" class="max-w-screen-2xl mx-auto px-6 space-y-16 -mt-32 relative z-20 pb-10">
+        <div>
+            <h2 class="text-3xl font-semibold gold-gradient mb-6">Featured Trailers 🔥</h2>
+            <div id="trending-row" class="flex gap-4 overflow-x-auto horizontal-scroll pb-4">
+                <!-- Trailer cards populated by script -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MOVIE SECTION (FULL MOVIES) -->
+    <div id="movies" class="max-w-screen-2xl mx-auto px-6 space-y-16 relative z-20 pb-20">
+        <div>
+            <h2 class="text-3xl font-semibold gold-gradient mb-6">Explore Full Movies 🎬</h2>
+            <div id="movies-row" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Movie cards populated by script -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MEET THE OWNER SECTION -->
+    <section id="owner" class="bg-zinc-900/50 py-24 border-y border-zinc-800">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold logo-font gold-gradient mb-4">Meet the Owner</h2>
+                <p class="text-zinc-400 max-w-xl mx-auto">The visionary behind NagaFlix, dedicated to bringing the best entertainment to Cambodia.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+                <!-- OWNER PROFILE -->
+                <div class="owner-card bg-zinc-950 p-8 rounded-3xl border border-zinc-800 text-center transition-all hover:border-amber-400/50 group">
+                    <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-amber-400/20 group-hover:border-amber-400 transition-all">
+                        <img src="./image2.png" class="w-full h-full object-cover transition-transform duration-500" alt="Somnang Yom">
+                    </div>
+                    <h3 class="text-3xl font-bold mb-1">Somnang Yom</h3>
+                    <p class="text-amber-400 text-lg font-medium mb-6">Student at RUPP</p>
+                    
+                    <div class="space-y-6 text-left">
+                        <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50">
+                            <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">About NagaFlix</h4>
+                            <p class="text-zinc-300 text-sm leading-relaxed">Welcome to NagaFlix — where legendary entertainment begins. Stream trending movies, thrilling series, and cinematic adventures all in one place.</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50">
+                                <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Cinematic Vision</h4>
+                                <p class="text-zinc-400 text-xs leading-relaxed">A place for film lovers to discover action, drama, horror, and comedy. Enjoy unlimited entertainment anytime, anywhere.</p>
+                            </div>
+                            <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50">
+                                <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Modern Tech</h4>
+                                <p class="text-zinc-400 text-xs leading-relaxed">Bringing the best streaming experience with fast access, modern design, and amazing content.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50">
+                            <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Khmer Pride</h4>
+                            <p class="text-zinc-400 text-xs leading-relaxed">Bringing Khmer creativity and global entertainment together. Movies. Entertainment. Endless streaming.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTACT US SECTION -->
+                <div class="bg-zinc-950 p-8 rounded-3xl border border-zinc-800 h-full">
+                    <h3 class="text-2xl font-bold mb-2 gold-gradient">Contact Us</h3>
+                    <p class="text-zinc-400 text-sm mb-8">Have questions or suggestions? We'd love to hear from you.</p>
+                    
+                    <form class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Full Name</label>
+                                <input type="text" placeholder="Your Name" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Email Address</label>
+                                <input type="email" placeholder="email@example.com" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Subject</label>
+                            <input type="text" placeholder="How can we help?" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Message</label>
+                            <textarea rows="4" placeholder="Write your message here..." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all resize-none"></textarea>
+                        </div>
+                        <button type="button" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-4 rounded-xl transition-all transform active:scale-[0.98]">
+                            Send Message
+                        </button>
+                    </form>
+
+                    <div class="mt-10 pt-10 border-t border-zinc-900 flex flex-col gap-4">
+                        <div class="flex items-center gap-4 text-zinc-400">
+                            <div class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-amber-400">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-zinc-500 uppercase font-bold">Email Us</p>
+                                <p class="text-sm">support@nagaflix.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 text-zinc-400">
+                            <div class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-amber-400">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-zinc-500 uppercase font-bold">Location</p>
+                                <p class="text-sm">Phnom Penh, Cambodia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOLLOW US SECTION -->
+    <section class="bg-black py-12 border-b border-zinc-900">
+        <div class="max-w-screen-2xl mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold gold-gradient mb-8">Follow Us!</h3>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/share/1DPvuyn1BH/?mibextid=wwXIfr" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
+                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#1877F2] group-hover:text-white transition-all shadow-lg">
+                        <i class="fa-brands fa-facebook-f text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Facebook</span>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/somnang_yom?igsh=MW44NDNvZG85ZW5yYg%3D%3D&utm_source=qr" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
+                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-gradient-to-tr group-hover:from-[#f9ce34] group-hover:via-[#ee2a7b] group-hover:to-[#6228d7] group-hover:text-white transition-all shadow-lg">
+                        <i class="fa-brands fa-instagram text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Instagram</span>
+                </a>
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@shokubutsu_0" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
+                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-black group-hover:text-white group-hover:border group-hover:border-zinc-700 transition-all shadow-lg">
+                        <i class="fa-brands fa-tiktok text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">TikTok</span>
+                </a>
+                <!-- Telegram -->
+                <a href="https://t.me/somnangyom" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
+                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#26A5E4] group-hover:text-white transition-all shadow-lg">
+                        <i class="fa-brands fa-telegram text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Telegram</span>
+                </a>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/855967505304" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
+                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#25D366] group-hover:text-white transition-all shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">WhatsApp</span>
+                </a>
+                <!-- WeChat -->
+                <a href="weixin://dl/chat?0967505304" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
+                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#07C160] group-hover:text-white transition-all shadow-lg">
+                        <i class="fa-brands fa-weixin text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">WeChat</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUPPORT ME SECTION -->
+    <section class="bg-zinc-950 py-20 border-b border-zinc-900">
+        <div class="max-w-screen-2xl mx-auto px-6 text-center">
+            <h3 class="text-3xl font-bold gold-gradient mb-4">Support Me</h3>
+            <p class="text-zinc-400 mb-10 max-w-md mx-auto">If you enjoy NagaFlix and want to support my work, you can scan the QR code below to contribute.</p>
+            
+            <div class="inline-block p-4 bg-white rounded-3xl shadow-2xl shadow-amber-400/10 transform hover:scale-105 transition-all duration-500">
+                <div class="bg-zinc-900 p-2 rounded-2xl">
+                    <img src="image3.png" alt="ABA QR Code" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-xl">
+                </div>
+                <div class="mt-4 flex items-center justify-center gap-3">
+                    <div class="w-10 h-10 bg-[#005a8d] rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                        <p style="font-size: 10px;">ABA</p><span style="color: red;">'</span>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-zinc-900 font-bold leading-tight">ABA Bank</p>
+                        <p class="text-zinc-500 text-xs font-medium">Scan to Pay</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 flex flex-wrap justify-center gap-4">
+                <span class="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-zinc-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">Fast Access</span>
+                <span class="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-zinc-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">Safe & Secure</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPONSORS SECTION -->
+    <section class="bg-black py-20 border-b border-zinc-900">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold gold-gradient mb-2">Our Partners & Sponsors</h3>
+                <p class="text-zinc-500 text-sm">Proudly supported by leading brands in Cambodia.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center justify-items-center opacity-1  hover:grayscale-0 transition-all duration-700">
+                <!-- ABA Bank -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXGM_4IH-PUoi-QW-h80w4f4zA8edR7Z70Ug&s" alt="ABA Bank" class="w-full h-full object-contain">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">ABA Bank</span>
+                </div>
+                <!-- Smart -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://yt3.googleusercontent.com/yzHrCaq9pcJQ3DKaqH3rm1cLRq-deOudpndUOlxEeUYd_BEphifRDen0iXEz3FRMRgjKkPwc=s900-c-k-c0x00ffffff-no-rj" alt="Smart Axiata" class="w-full h-full object-contain">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">Smart Axiata</span>
+                </div>
+                <!-- Chip Mong -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://images.crunchbase.com/image/upload/c_pad,f_auto,q_auto:eco,dpr_1/ujrwed9bibpujkrzshvt?ik-sanitizeSvg=true" alt="Chip Mong Group" class="w-full h-full object-contain">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter text-center">Chip Mong Group</span>
+                </div>
+                <!-- Apple -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white/1 rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://scontent.fpnh18-3.fna.fbcdn.net/v/t39.30808-6/347782575_757737482655638_8994026651056497622_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEtQO6w-jCbAsvnK5N2DjBENuTyvS8_WNU25PK9Lz9Y1Xwxz5iR4W1DYLB0vXiLXKeeY5ImdVfsP-MZxxWU4_S0&_nc_ohc=n-exQsxa4sYQ7kNvwGTJXCs&_nc_oc=AdpWk99aLLZquUzxq6x7jzVNFffeLgMUWu-gHPFdT5Wd3SpwxrqdQeYJllkn7s4eBFU&_nc_zt=23&_nc_ht=scontent.fpnh18-3.fna&_nc_gid=mb6eWPl4Jf5tjO14vgDxeQ&_nc_ss=7b2a8&oh=00_Af7JOwRzrwQ2781vL_ruJhK1dhA6_W0pBY0rTl7EskfVfw&oe=6A0BA96E" alt="Apple" class="w-full h-full object-contain    ">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">Baramey Production</span>
+                </div>
+                <!-- Human Beer (Hanuman) -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://beertasting.app/storage/media/fd68a55c67d94e8cb61fe241e4eb1835/wdawdadadadawdawdaw.JPG" alt="Hanuman Beer" class="w-full h-full object-contain">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">Hanuman Beer</span>
+                </div>
+                <!-- BROWN Coffee -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://www.techoairport.com.kh/tia-backend/locators/1753854813934-Logo-md.jpg" alt="BROWN Coffee" class="w-full h-full object-contain ">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">BROWN Coffee</span>
+                </div>
+                <!-- BROWN Coffee -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://scontent.fpnh18-5.fna.fbcdn.net/v/t1.6435-9/65146581_2956334307715762_8763939977907142656_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFg4BshaVeSTkhBdzDFGe143QTAUVhA-nzdBMBRWED6fB-eoCNNWaJoIPPqfGsZC_qWBUUIA2i7qnP8hpp_1vV8&_nc_ohc=UmRTlaE8A8IQ7kNvwHFFIGa&_nc_oc=AdrG1kCYodcVq3ph0wHbx6NhuiOh7FrPNacCUOCf0loImjjBTgbIcIxYYnXlCgT78Wo&_nc_zt=23&_nc_ht=scontent.fpnh18-5.fna&_nc_gid=-DCr0ANvmTXq2I_9a-jSRQ&_nc_ss=7b2a8&oh=00_Af55z_LvdskIZsm7wSuTuB5GFE4gqTLRUJBHfU6JRxPtTw&oe=6A2D3903" alt="BROWN Coffee" class="w-full h-full object-contain ">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">Cambodia Water</span>
+                </div>
+                <!-- BROWN Coffee -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://tela.com.kh/wp-content/uploads/2019/05/site-icon.png">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">Tela</span>
+                </div>
+                <!-- BROWN Coffee -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://scontent.fpnh18-6.fna.fbcdn.net/v/t39.30808-6/310548450_395153136151029_3449722360158349780_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeERs-GD0-Cz8N4mq9OlvLUcUs6TzXLgUO5SzpPNcuBQ7mIyk6kEnvY-cyDHmIOfDLEz31eRBp7EhHNDfPDHqEr0&_nc_ohc=lXfeA-Q8Z2wQ7kNvwHiLEFN&_nc_oc=AdoWvrL-YBC63oQmFaKE3BMNN1ne8otcGnoEom_mZquHIKLmCdq-NCAg_hTR2JEd_gQ&_nc_zt=23&_nc_ht=scontent.fpnh18-6.fna&_nc_gid=6Coi4sB06R329O-Ahgsk1g&_nc_ss=7b2a8&oh=00_Af5zx2DFD2r_IgXolkNrhxr0yyJfCA9lPR08jSZBnQLrHA&oe=6A0BA120">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">មី ជាតិ</span>
+                </div>
+                <!-- BROWN Coffee -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://scontent.fpnh18-4.fna.fbcdn.net/v/t39.30808-6/524875529_1183765103778385_7062321086944048043_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFu-1zebx-VjYNYRCv8oyCcRN8jTWjl5YtE3yNNaOXli3aL09uqg7MA2qZHtt6mz9-8eo5Byx1U6gi1g3SFTwon&_nc_ohc=zdJ6O0KvVgoQ7kNvwENCp6T&_nc_oc=Adq_R4IXo0oK8EMb6r5b5aI66OJtXlJYSG-gxuuC1hQHOM0jJAxc91QekCnm7olDn-k&_nc_zt=23&_nc_ht=scontent.fpnh18-4.fna&_nc_gid=0qUfKN7GZ7vJexlB6AvkBA&_nc_ss=7b2a8&oh=00_Af6yEclK4zW3zAMKnNryDOGhZHQf4y7Pgqzb9Tl5bctmMA&oe=6A0BB084">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">royal cambodia</span>
+                </div>
+                <!-- BROWN Coffee -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://scontent.fpnh18-1.fna.fbcdn.net/v/t39.30808-6/347820174_544754467864098_4525187739530173357_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeESwPfPBdpAs6Itts0fs1Ka7yZ79Zf69TvvJnv1l_r1O5KY1OnDVflawzXiKHJJYUyjZ418BjpNWF1O9ffVue3f&_nc_ohc=VxC4b2TEKrMQ7kNvwGQOdJ5&_nc_oc=AdoK8Pvv6LVvkfkbddzh5zK1gU_AinKjdV6yOTwkcmvyIvwDaYDKfv6LqSST0GoDQy0&_nc_zt=23&_nc_ht=scontent.fpnh18-1.fna&_nc_gid=sP6NBHFc4IJZPEUKDNP3NQ&_nc_ss=7b2a8&oh=00_Af6ss3miBjtbb18XVEHfY8VSL6xuXBLmKgQAJ1CZoLvwng&oe=6A0B9064">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">Vital</span>
+                </div>
+                <!-- BROWN Coffee -->
+                <div class="group flex flex-col items-center gap-3 transition-all hover:scale-110 hover:opacity-100">
+                    <div class="w-16 h-16 md:w-24 md:h-24 bg-white rounded-2xl flex items-center justify-center p-1 group-hover:bg-white/10 transition-all overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvnjQ6wlUpjVWqUD7gmN6mIaqyJmXLFjOjsA&s">
+                    </div>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">Klen</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-zinc-900 text-center bg-black">
+        <p class="text-zinc-500 text-sm">© 2026 Naga Flix Cambodia. Proudly supporting local cinema.</p>
+    </footer>
+
+    <!-- VIDEO MODAL -->
+    <div id="video-modal" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center">
+        <div class="max-w-5xl w-full mx-4 relative">
+            <button onclick="closeModal()" class="absolute -top-12 right-0 text-white text-4xl hover:text-amber-400">×</button>
+            <div class="aspect-video bg-black rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl">
+                <iframe id="video-frame" class="w-full h-full" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUTH MODAL (ENHANCED) -->
+    <div id="auth-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 w-full max-w-md rounded-3xl p-8 relative">
+            <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-zinc-500 hover:text-white text-3xl">×</button>
+            
+            <div id="signin-form-container">
+                <h2 class="text-2xl font-bold text-center gold-gradient mb-8">Sign In</h2>
+                <form onsubmit="handleAuthAction(event)" class="space-y-4">
+                    <input type="email" placeholder="Email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
+                    <input type="password" placeholder="Password" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
+                    <button type="submit" class="w-full bg-amber-400 text-black font-bold py-4 rounded-xl hover:bg-amber-300 transition-all">Sign In</button>
+                </form>
+                <p class="text-zinc-500 text-center mt-6 text-sm">
+                    New to Naga Flix? <button onclick="toggleAuthMode('signup')" class="text-amber-400 hover:underline">Sign up now</button>
+                </p>
+            </div>
+
+            <div id="signup-form-container" class="hidden">
+                <h2 class="text-2xl font-bold text-center gold-gradient mb-8">Create Account</h2>
+                <form onsubmit="handleAuthAction(event)" class="space-y-4">
+                    <input type="text" placeholder="Full Name" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
+                    <input type="email" placeholder="Email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
+                    <input type="password" placeholder="Password" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
+                    <button type="submit" class="w-full bg-amber-400 text-black font-bold py-4 rounded-xl hover:bg-amber-300 transition-all">Create Account</button>
+                </form>
+                <p class="text-zinc-500 text-center mt-6 text-sm">
+                    Already have an account? <button onclick="toggleAuthMode('signin')" class="text-amber-400 hover:underline">Sign in</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const trailerData = [
+            { title: "The Peacekeeper", kh: "សត្រូវព្រាយ", img: "https://scontent.fpnh18-1.fna.fbcdn.net/v/t39.30808-6/694973536_977506471687129_8989255514275114639_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEJttkVYyQ-BmXq22Iz-FUspdp8RI1UGrGl2nxEjVQasZqoxNIHwVuoQJ6UFCSaigpbJyUssdZHSuwOVLtw9Gk-&_nc_ohc=deZZLvj1kK4Q7kNvwHc2rWS&_nc_oc=Adp-9UtJWrjzu1Xfjs_Q3JYmxLMYsKn8eYShYn3YXAgFuGYBpehZpMsqz96wwakFbgM&_nc_zt=23&_nc_ht=scontent.fpnh18-1.fna&_nc_gid=bPaKeQL__PtYOJTVXhIXrA&_nc_ss=7b2a8&oh=00_Af71EKdJEBFBqnlMaWAfqRCh-t7LzFtWboSXEtJPw9b4tg&oe=6A0B8F48", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Far Away, Close to You", kh: "ឆ្ងាយតែជិត", img: "https://picsum.photos/id/201/400/600", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "The Enemy of Demon", kh: "សត្រូវបិសាច", img: "https://picsum.photos/id/251/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Lost in the Jungle", kh: "វង្វេងក្នុងព្រៃ", img: "https://picsum.photos/id/301/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "The Golden Land", kh: "ទឹកដីមាស", img: "https://picsum.photos/id/351/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Silent Echoes", kh: "សម្លេងស្ងាត់", img: "https://picsum.photos/id/401/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" }
+        ];
+
+        const movieData = [
+            { title: "Jailbreak", kh: "ការបំបែកគុក", img: "https://picsum.photos/id/10/400/600", year: "2017", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "First They Killed My Father", kh: "មុនដំបូងខ្មែរក្រហមសម្លាប់ប៉ារបស់ខ្ញុំ", img: "https://picsum.photos/id/20/400/600", year: "2017", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "The Last Reel", kh: "ដុំហ្វីលចុងក្រោយ", img: "https://picsum.photos/id/30/400/600", year: "2014", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "In the Life of Music", kh: "ក្នុងជីវិតតន្ត្រី", img: "https://picsum.photos/id/40/400/600", year: "2018", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "Fathers", kh: "លោកឪពុក", img: "https://picsum.photos/id/50/400/600", year: "2020", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Ruin", kh: "ការបំផ្លាញ", img: "https://picsum.photos/id/60/400/600", year: "2013", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "The Missing Picture", kh: "រូបភាពដែលបាត់បង់", img: "https://picsum.photos/id/70/400/600", year: "2013", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "A River Changes Course", kh: "ទន្លេប្តូរទិស", img: "https://picsum.photos/id/80/400/600", year: "2013", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "Golden Slumbers", kh: "ដំណេកមាស", img: "https://picsum.photos/id/90/400/600", year: "2011", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Same Same But Different", kh: "ដូចគ្នាខ្លះខុសគ្នាខ្លះ", img: "https://picsum.photos/id/100/400/600", year: "2009", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "The Gate", kh: "ខ្លោងទ្វារ", img: "https://picsum.photos/id/110/400/600", year: "2014", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Angkor Awakens", kh: "អង្គរភ្ញាក់ឡើង", img: "https://picsum.photos/id/120/400/600", year: "2017", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "Small White Shells", kh: "សំបកខ្យងតូចៗ", img: "https://picsum.photos/id/130/400/600", year: "2021", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "White Building", kh: "អគារស", img: "https://picsum.photos/id/140/400/600", year: "2021", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "Everything Will Be OK", kh: "គ្រប់យ៉ាងនឹងប្រសើរឡើង", img: "https://picsum.photos/id/150/400/600", year: "2022", url: "https://www.youtube.com/embed/00rW1_twWhI" }
+        ];
+
+        function populateContent() {
+            const trailerRow = document.getElementById('trending-row');
+            trailerData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "movie-card min-w-[200px] md:min-w-[280px] cursor-pointer group";
+                card.innerHTML = `
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
+                        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fa-solid fa-circle-play text-5xl text-amber-400"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4">
+                            <div class="text-sm font-bold">${item.kh}</div>
+                            <div class="text-amber-400 text-xs">${item.title}</div>
+                        </div>
+                    </div>`;
+                card.onclick = () => openVideo(item.url);
+                trailerRow.appendChild(card);
+            });
+
+            const movieRow = document.getElementById('movies-row');
+            movieData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "movie-card cursor-pointer group";
+                card.innerHTML = `
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
+                        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fa-solid fa-play text-4xl text-white"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4">
+                            <div class="text-sm font-bold truncate">${item.kh}</div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-amber-400 text-xs">${item.title}</span>
+                                <span class="text-zinc-500 text-[10px]">${item.year}</span>
+                            </div>
+                        </div>
+                    </div>`;
+                card.onclick = () => openVideo(item.url);
+                movieRow.appendChild(card);
+            });
+        }
+
+        function openVideo(url) {
+            document.getElementById('video-frame').src = url + "?autoplay=1";
+            document.getElementById('video-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('video-modal').classList.add('hidden');
+            document.getElementById('video-frame').src = "";
+        }
+
+        function openAuthModal(mode) {
+            document.getElementById('auth-modal').classList.remove('hidden');
+            toggleAuthMode(mode === 'signin' ? 'signin' : 'signup');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function toggleAuthMode(mode) {
+            if (mode === 'signin') {
+                document.getElementById('signin-form-container').classList.remove('hidden');
+                document.getElementById('signup-form-container').classList.add('hidden');
+            } else {
+                document.getElementById('signin-form-container').classList.add('hidden');
+                document.getElementById('signup-form-container').classList.remove('hidden');
+            }
+        }
+
+        function handleAuthAction(e) {
+            e.preventDefault();
+            // Simulate successful login/signup
+            document.getElementById('nav-signin-btn').classList.add('hidden');
+            document.getElementById('nav-profile-ui').classList.remove('hidden');
+            closeAuthModal();
+        }
+
+        function handleLogout() {
+            document.getElementById('nav-signin-btn').classList.remove('hidden');
+            document.getElementById('nav-profile-ui').classList.add('hidden');
+            document.getElementById('profile-dropdown').classList.add('hidden');
+        }
+
+        function toggleProfileDropdown() {
+            document.getElementById('profile-dropdown').classList.toggle('hidden');
+        }
+
+        function handleSearch(query) {
+            const searchTerm = query.toLowerCase();
+            const allCards = document.querySelectorAll('.movie-card');
+            
+            allCards.forEach(card => {
+                const title = card.innerText.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = "";
+                    card.style.opacity = "1";
+                    card.style.transform = "scale(1)";
+                } else {
+                    card.style.display = "none";
+                    card.style.opacity = "0";
+                    card.style.transform = "scale(0.95)";
+                }
+            });
+
+            // Smoothly scroll to content if searching and not already there
+            if (searchTerm.length > 0 && window.scrollY < 300) {
+                window.scrollTo({ top: 400, behavior: 'smooth' });
+            }
+        }
+
+        let currentHeroIndex = 0;
+        let heroInterval;
+
+        function startHeroAutoCycle() {
+            if (heroInterval) clearInterval(heroInterval);
+            heroInterval = setInterval(() => {
+                reloadHero(true);
+            }, 8000); // Cycles every 8 seconds
+        }
+
+        function reloadHero(isAuto = false) {
+            currentHeroIndex = (currentHeroIndex + 1) % trailerData.length;
+            const movie = trailerData[currentHeroIndex];
+            
+            const heroBg = document.getElementById('hero-bg');
+            const heroTitle = document.getElementById('hero-title');
+            const heroDesc = document.getElementById('hero-desc');
+            const heroPlayBtn = document.getElementById('hero-play-btn');
+
+            // Fade out effect
+            heroBg.style.opacity = "0.5";
+            
+            setTimeout(() => {
+                heroBg.style.backgroundImage = `url('${movie.img}')`;
+                heroTitle.innerText = movie.kh;
+                heroDesc.innerText = `Discover "${movie.title}" - a cinematic journey exclusively on NagaFlix. Experience the best of Khmer entertainment.`;
+                heroPlayBtn.onclick = () => openVideo(movie.url);
+                
+                // Fade in effect
+                heroBg.style.opacity = "1";
+            }, 300);
+
+            // If manual click, reset the auto-cycle timer
+            if (!isAuto) {
+                startHeroAutoCycle();
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Initialize theme with automatic detection
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            
+            let themeToApply = 'dark'; // Default
+
+            if (savedTheme) {
+                themeToApply = savedTheme;
+            } else {
+                // 1. Check system preference
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                // 2. Check time of day (6 PM to 6 AM is dark)
+                const hour = new Date().getHours();
+                const isNight = hour >= 18 || hour < 6;
+
+                if (prefersDark || isNight) {
+                    themeToApply = 'dark';
+                } else {
+                    themeToApply = 'light';
+                }
+            }
+            
+            body.classList.remove('light-theme', 'dark-theme');
+            body.classList.add(themeToApply + '-theme');
+            
+            if (themeToApply === 'light') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        window.onload = () => {
+            initTheme();
+            populateContent();
+            startHeroAutoCycle();
+        };
+    </script>
+</body>
+</html>
