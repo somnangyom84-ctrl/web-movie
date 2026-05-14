@@ -62,19 +62,19 @@
 
     <!-- NAVBAR -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
+        <div class="max-w-screen-2xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-x-3 shrink-0">
                 <!-- LOGO IMAGE -->
-                <a href="#" class="flex items-center gap-3 transform active:scale-95 active:opacity-80 transition-all duration-200" >
-                    <img src="image.png" alt="Logo" class="w-10 h-10  rounded-full flex items-center justify-center shadow-lg shadow-amber-50/50" >
-                    <div class="hidden sm:block " >
-                        <span class="logo-font text-4xl font-bold tracking-tighter gold-gradient" >Naga</span>
-                        <span class="logo-font text-2xl font-bold tracking-tighter text-white"  >Flix</span>
+                <a href="#" class="flex items-center  md:gap-3 transform active:scale-95 active:opacity-80 transition-all duration-200" >
+                    <img src="image.png" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-lg " >
+                    <div class="flex items-baseline" >
+                        <span class="logo-font text-2xl md:text-4xl font-bold tracking-tighter gold-gradient" >Naga</span>
+                        <span class="logo-font text-xl md:text-2xl font-bold tracking-tighter text-white"  >Flix</span>
                     </div>
                 </a>
             </div>
 
-            <div class="hidden lg:flex items-center gap-x-8 text-sm font-medium">
+            <div class="hidden xl:flex items-center gap-x-8 text-sm font-medium">
                 <a href="#" class="nav-link text-white">Home</a>
                 <a href="#trending" class="nav-link text-zinc-400 hover:text-white">Trailers</a>
                 <a href="#movies" class="nav-link text-zinc-400 hover:text-white">Movies</a>
@@ -82,30 +82,56 @@
             </div>
 
             <!-- SEARCH BAR -->
-            <div class="hidden md:flex items-center flex-1 max-w-md mx-8">
+            <div class="hidden lg:flex items-center flex-1 max-w-md">
                 <div class="relative w-full group">
                     <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-amber-400 transition-colors"></i>
                     <input type="text" 
                            id="movie-search"
                            onkeyup="handleSearch(this.value)"
                            placeholder="Search movies, trailers..." 
-                           class="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-2.5 pl-11 pr-4 text-sm text-white focus:border-amber-400/50 focus:bg-zinc-900 outline-none transition-all placeholder:text-zinc-600">
+                           class="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-2 md:py-2.5 pl-11 pr-4 text-sm text-white focus:border-amber-400/50 focus:bg-zinc-900 outline-none transition-all placeholder:text-zinc-600">
                 </div>
             </div>
 
-            <div id="auth-ui-container" class="flex items-center gap-x-5">
+            <div id="auth-ui-container" class="flex items-center gap-x-2 md:gap-x-4 shrink-0">
                 <!-- THEME TOGGLE -->
-                <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-zinc-800/50 flex items-center justify-center text-amber-400 hover:bg-zinc-800 transition-all border border-white/10" title="Toggle Day/Dark Mode">
-                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                <button onclick="toggleTheme()" class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-zinc-800/50 flex items-center justify-center text-amber-400 hover:bg-zinc-800 transition-all border border-white/10" title="Toggle Day/Dark Mode">
+                    <i id="theme-icon" class="fa-solid fa-moon text-sm md:text-base"></i>
                 </button>
-                <button id="nav-signin-btn" onclick="openAuthModal('signin')" class="bg-amber-400 hover:bg-amber-300 text-black px-6 py-2 rounded-xl text-sm font-bold transition-all">Sign In</button>
+                
+                <!-- MOBILE MENU BUTTON -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden w-9 h-9 rounded-xl bg-zinc-800/50 flex items-center justify-center text-white border border-white/10">
+                    <i id="menu-icon" class="fa-solid fa-bars"></i>
+                </button>
+
+                <button id="nav-signin-btn" onclick="openAuthModal('signin')" class="hidden sm:block bg-amber-400 hover:bg-amber-300 text-black px-4 md:px-6 py-2 rounded-xl text-sm font-bold transition-all">Sign In</button>
+                
                 <div id="nav-profile-ui" class="hidden relative">
-                    <button onclick="toggleProfileDropdown()" class="w-9 h-9 rounded-full overflow-hidden border-2 border-amber-400"><img src="./image2.png" class="w-full h-full object-cover"></button>
+                    <button onclick="toggleProfileDropdown()" class="w-8 h-8 md:w-9 md:h-9 rounded-full overflow-hidden border-2 border-amber-400"><img src="./image2.png" class="w-full h-full object-cover"></button>
                     <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl py-2 shadow-2xl">
                         <button onclick="handleLogout()" class="w-full text-left px-4 py-2 hover:bg-zinc-800 text-red-400 text-sm">Sign Out</button>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- MOBILE MENU OVERLAY -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-zinc-950 border-t border-white/10 px-6 py-6 space-y-6">
+            <div class="flex flex-col gap-y-4">
+                <a href="#" onclick="toggleMobileMenu()" class="text-lg font-medium text-white">Home</a>
+                <a href="#trending" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Trailers</a>
+                <a href="#movies" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Movies</a>
+                <a href="#owner" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Meet Owner</a>
+            </div>
+            <!-- MOBILE SEARCH -->
+            <div class="relative w-full">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
+                <input type="text" 
+                       onkeyup="handleSearch(this.value)"
+                       placeholder="Search..." 
+                       class="w-full bg-zinc-900 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white outline-none">
+            </div>
+            <button onclick="openAuthModal('signin'); toggleMobileMenu()" class="w-full bg-amber-400 text-black py-4 rounded-xl font-bold">Sign In</button>
         </div>
     </nav>
 
@@ -699,6 +725,20 @@
             } else {
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
             }
         }
 
