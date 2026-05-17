@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naga Flix | Cambodia Streaming 2026</title>
+    <title>Naga Flix </title>
+    <link rel="icon" type="images/x-icon" href="./image.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -69,7 +71,7 @@
                     <img src="image.png" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-lg " >
                     <div class="flex items-baseline" >
                         <span class="logo-font text-2xl md:text-4xl font-bold tracking-tighter gold-gradient" >Naga</span>
-                        <span class="logo-font text-xl md:text-2xl font-bold tracking-tighter text-white"  >Flix</span>
+                        <span class="logo-font text-xl md:text-4xl font-bold tracking-tighter text-white"  >Flix</span>
                     </div>
                 </a>
             </div>
@@ -78,6 +80,8 @@
                 <a href="#" class="nav-link text-white">Home</a>
                 <a href="#trending" class="nav-link text-zinc-400 hover:text-white">Trailers</a>
                 <a href="#movies" class="nav-link text-zinc-400 hover:text-white">Movies</a>
+                <a href="#pro" class="nav-link text-zinc-400 hover:text-white">Movie Pro</a>
+                <a href="#pricing" class="nav-link text-zinc-400 hover:text-white">Subscriptions</a>
                 <a href="#owner" class="nav-link text-zinc-400 hover:text-white">Meet Owner</a>
             </div>
 
@@ -104,6 +108,10 @@
                     <i id="menu-icon" class="fa-solid fa-bars"></i>
                 </button>
 
+                <a href="#pricing" class="hidden sm:flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-amber-400 px-4 py-2 rounded-xl text-sm font-bold transition-all border border-amber-400/20">
+                    <i class="fa-solid fa-crown"></i>
+                    Get Pro
+                </a>
                 <button id="nav-signin-btn" onclick="openAuthModal('signin')" class="hidden sm:block bg-amber-400 hover:bg-amber-300 text-black px-4 md:px-6 py-2 rounded-xl text-sm font-bold transition-all">Sign In</button>
                 
                 <div id="nav-profile-ui" class="hidden relative">
@@ -121,6 +129,8 @@
                 <a href="#" onclick="toggleMobileMenu()" class="text-lg font-medium text-white">Home</a>
                 <a href="#trending" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Trailers</a>
                 <a href="#movies" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Movies</a>
+                <a href="#pro" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Movie Pro</a>
+                <a href="#pricing" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Subscriptions</a>
                 <a href="#owner" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Meet Owner</a>
             </div>
             <!-- MOBILE SEARCH -->
@@ -146,10 +156,10 @@
                 <div class="flex flex-wrap gap-4">
                     <button id="hero-play-btn" onclick="openVideo('https://www.youtube.com/embed/00rW1_twWhI')" class="bg-white hover:bg-zinc-200 text-black font-bold px-8 py-4 rounded-xl flex items-center gap-3 transform active:scale-95 transition-all">
                         <i class="fa-solid fa-play"></i> Watch Trailer
-                    </button>
+                    <!-- </button>
                     <button onclick="reloadHero()" class="bg-zinc-800/50 hover:bg-zinc-800 text-white border border-white/10 px-6 py-4 rounded-xl flex items-center gap-3 transform active:scale-95 transition-all backdrop-blur-sm">
                         <i class="fa-solid fa-rotate-right"></i> Reload
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>
@@ -174,6 +184,128 @@
             </div>
         </div>
     </div>
+
+    <!-- MOVIE PRO SECTION -->
+    <div id="pro" class="bg-zinc-950 py-20 border-y border-zinc-900">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-4xl font-bold gold-gradient flex items-center gap-3">
+                        Movie Pro <span class="bg-amber-400 text-black text-[10px] px-2 py-0.5 rounded-full uppercase tracking-tighter">Premium</span>
+                    </h2>
+                    <p class="text-zinc-400 mt-2">Unlock exclusive 4K content, early access, and no ads.</p>
+                </div>
+                <a href="#pricing" class="hidden md:block text-amber-400 hover:text-amber-300 font-bold text-sm underline decoration-2 underline-offset-8 transition-all">View All Benefits</a>
+            </div>
+            
+            <!-- PRO EXCLUSIVE TRAILERS -->
+            <div class="mb-20">
+                <h3 class="text-xl font-bold text-white mb-8 flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-amber-400"></i> Pro Sneak Peeks
+                </h3>
+                <div id="pro-trailers-row" class="flex gap-6 overflow-x-auto horizontal-scroll pb-6">
+                    <!-- Pro trailer cards populated by script -->
+                </div>
+            </div>
+
+            <!-- PRO EXCLUSIVE MOVIES GRID -->
+            <div class="mb-20">
+                <h3 class="text-xl font-bold text-white mb-8 flex items-center gap-2">
+                    <i class="fa-solid fa-star text-amber-400"></i> Pro Exclusives
+                </h3>
+                <div id="pro-movies-row" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <!-- Pro movie cards populated by script -->
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pro Feature 1 -->
+                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-amber-400/10 hover:border-amber-400/40 transition-all group">
+                    <div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt-lightning text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Ultra Fast Streaming</h3>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Experience zero buffering with our dedicated high-speed servers optimized for 4K streaming.</p>
+                </div>
+                <!-- Pro Feature 2 -->
+                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-amber-400/10 hover:border-amber-400/40 transition-all group">
+                    <div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-clapperboard text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Early Access</h3>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Watch the latest Khmer blockbusters and international series 48 hours before anyone else.</p>
+                </div>
+                <!-- Pro Feature 3 -->
+                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-amber-400/10 hover:border-amber-400/40 transition-all group">
+                    <div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-download text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Offline Downloads</h3>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Download your favorite movies and series to watch anytime, anywhere, even without internet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-24 bg-black">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold logo-font gold-gradient mb-4">Choose Your Plan</h2>
+                <p class="text-zinc-400 max-w-xl mx-auto">Get unlimited access to NagaFlix with our flexible subscription options.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Monthly Plan -->
+                <div class="bg-zinc-900/30 p-10 rounded-[2.5rem] border border-zinc-800 hover:border-amber-400/30 transition-all relative overflow-hidden group">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Monthly Pro</h3>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-5xl font-bold text-white">$4.99</span>
+                            <span class="text-zinc-500">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center gap-3 text-zinc-300">
+                            <i class="fa-solid fa-circle-check text-amber-400"></i> Unlimited 4K Streaming
+                        </li>
+                        <li class="flex items-center gap-3 text-zinc-300">
+                            <i class="fa-solid fa-circle-check text-amber-400"></i> No Advertisements
+                        </li>
+                        <li class="flex items-center gap-3 text-zinc-300">
+                            <i class="fa-solid fa-circle-check text-amber-400"></i> Cancel Anytime
+                        </li>
+                    </ul>
+                    <button class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-4 rounded-2xl transition-all">Start 7-Day Free Trial</button>
+                </div>
+
+                <!-- Yearly Plan -->
+                <div class="bg-zinc-900/30 p-10 rounded-[2.5rem] border-2 border-amber-400 shadow-2xl shadow-amber-400/10 transition-all relative overflow-hidden group">
+                    <div class="absolute top-6 right-6 bg-amber-400 text-black text-[10px] font-black px-3 py-1 rounded-full uppercase">Best Value</div>
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Yearly Pro</h3>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-5xl font-bold text-white">$45.00</span>
+                            <span class="text-zinc-500">/year</span>
+                        </div>
+                        <p class="text-amber-400 text-xs font-bold mt-2">Save $15 per year!</p>
+                    </div>
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center gap-3 text-zinc-300">
+                            <i class="fa-solid fa-circle-check text-amber-400"></i> Everything in Monthly
+                        </li>
+                        <li class="flex items-center gap-3 text-zinc-300">
+                            <i class="fa-solid fa-circle-check text-amber-400"></i> 2 Months Free
+                        </li>
+                        <li class="flex items-center gap-3 text-zinc-300">
+                            <i class="fa-solid fa-circle-check text-amber-400"></i> Early Access to Premiers
+                        </li>
+                    </ul>
+                    <button class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-4 rounded-2xl transition-all">Get Yearly Pro</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- MEET THE OWNER SECTION -->
     <section id="owner" class="bg-zinc-900/50 py-24 border-y border-zinc-800">
@@ -271,9 +403,9 @@
     </section>
 
     <!-- FOLLOW US SECTION -->
-    <section class="bg-black py-12 border-b border-zinc-900">
+    <section  class="bg-black py-12 border-b border-zinc-900">
         <div class="max-w-screen-2xl mx-auto px-6 text-center">
-            <h3 class="text-2xl font-bold gold-gradient mb-8">Follow Us!</h3>
+            <h3 class="text-4xl font-bold gold-gradient mb-8" style='font-family: "Supermercado One", sans-serif;'>Follow Us!</h3>
             <div class="flex flex-wrap justify-center gap-6 md:gap-10">
                 <!-- Facebook -->
                 <a href="https://www.facebook.com/share/1DPvuyn1BH/?mibextid=wwXIfr" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
@@ -304,7 +436,7 @@
                     <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Telegram</span>
                 </a>
                 <!-- WhatsApp -->
-                <a href="https://wa.me/855967505304" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
+                <a href="https://wa.me/0967505304" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
                     <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#25D366] group-hover:text-white transition-all shadow-lg">
                         <i class="fa-brands fa-whatsapp text-2xl"></i>
                     </div>
@@ -324,7 +456,7 @@
     <!-- SUPPORT ME SECTION -->
     <section class="bg-zinc-950 py-20 border-b border-zinc-900">
         <div class="max-w-screen-2xl mx-auto px-6 text-center">
-            <h3 class="text-3xl font-bold gold-gradient mb-4">Support Me</h3>
+            <h3 class="text-4xl font-bold gold-gradient mb-4" style='font-family: "Supermercado One", sans-serif;'>Support Me</h3>
             <p class="text-zinc-400 mb-10 max-w-md mx-auto">If you enjoy NagaFlix and want to support my work, you can scan the QR code below to contribute.</p>
             
             <div class="inline-block p-4 bg-white rounded-3xl shadow-2xl shadow-amber-400/10 transform hover:scale-105 transition-all duration-500">
@@ -353,7 +485,7 @@
     <section class="bg-black py-20 border-b border-zinc-900">
         <div class="max-w-screen-2xl mx-auto px-6">
             <div class="text-center mb-12">
-                <h3 class="text-2xl font-bold gold-gradient mb-2">Our Partners & Sponsors</h3>
+                <h3 class="text-4xl font-bold gold-gradient mb-2" style='font-family: "Supermercado One", sans-serif;'>Our Partners & Sponsors</h3>
                 <p class="text-zinc-500 text-sm">Proudly supported by leading brands in Cambodia.</p>
             </div>
             
@@ -522,6 +654,26 @@
             { title: "Everything Will Be OK", kh: "គ្រប់យ៉ាងនឹងប្រសើរឡើង", img: "https://picsum.photos/id/150/400/600", year: "2022", url: "https://www.youtube.com/embed/00rW1_twWhI" }
         ];
 
+        const proMovieData = [
+            { title: "Kingdom of Wonders", kh: "ព្រះរាជាណាចក្រអច្ឆរិយៈ", img: "https://picsum.photos/id/160/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Shadows of Angkor", kh: "ស្រមោលអង្គរ", img: "https://picsum.photos/id/170/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "The Last Guardian", kh: "អ្នកការពារចុងក្រោយ", img: "https://picsum.photos/id/180/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Mekong Rhythms", kh: "ចង្វាក់មេគង្គ", img: "https://picsum.photos/id/190/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "Silver Pagoda Secrets", kh: "អាថ៌កំបាំងព្រះវិហារប្រាក់", img: "https://picsum.photos/id/200/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Phnom Penh Nights", kh: "រាត្រីភ្នំពេញ", img: "https://picsum.photos/id/210/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "Ancient Echoes", kh: "សម្លេងបុរាណ", img: "https://picsum.photos/id/220/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "The Silk Weaver", kh: "អ្នកត្បាញសូត្រ", img: "https://picsum.photos/id/230/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "Bokator Spirit", kh: "វិញ្ញាណល្បុក្កតោ", img: "https://picsum.photos/id/240/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Tonle Sap Tales", kh: "រឿងរ៉ាវបឹងទន្លេសាប", img: "https://picsum.photos/id/250/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" }
+        ];
+
+        const proTrailerData = [
+            { title: "The Dragon's Breath", kh: "ដង្ហើមនាគ", img: "https://picsum.photos/id/260/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "Spirit of the Forest", kh: "វិញ្ញាណព្រៃភ្នំ", img: "https://picsum.photos/id/270/400/600", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
+            { title: "Echoes of History", kh: "សម្លេងប្រវត្តិសាស្ត្រ", img: "https://picsum.photos/id/280/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
+            { title: "The Royal Quest", kh: "បេសកកម្មព្រះរាជា", img: "https://picsum.photos/id/290/400/600", url: "https://www.youtube.com/embed/ePCjZ89Us-c" }
+        ];
+
         function populateContent() {
             const trailerRow = document.getElementById('trending-row');
             trailerData.forEach(item => {
@@ -562,6 +714,53 @@
                     </div>`;
                 card.onclick = () => openVideo(item.url);
                 movieRow.appendChild(card);
+            });
+
+            const proMovieRow = document.getElementById('pro-movies-row');
+            proMovieData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "movie-card cursor-pointer group";
+                card.innerHTML = `
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
+                        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute top-3 left-3 bg-amber-400 text-black px-2 py-0.5 rounded text-[10px] font-bold">
+                            PRO
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fa-solid fa-crown text-4xl text-amber-400"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-amber-400/20 via-black/80 to-transparent p-4">
+                            <div class="text-sm font-bold truncate">${item.kh}</div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-amber-400 text-xs">${item.title}</span>
+                                <span class="text-zinc-500 text-[10px]">${item.year}</span>
+                            </div>
+                        </div>
+                    </div>`;
+                card.onclick = () => openVideo(item.url);
+                proMovieRow.appendChild(card);
+            });
+
+            const proTrailerRow = document.getElementById('pro-trailers-row');
+            proTrailerData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "movie-card min-w-[200px] md:min-w-[280px] cursor-pointer group";
+                card.innerHTML = `
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
+                        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute top-3 left-3 bg-amber-400 text-black px-2 py-0.5 rounded text-[10px] font-bold">
+                            PRO SNEAK
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fa-solid fa-circle-play text-5xl text-amber-400"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-amber-400/20 via-black/80 to-transparent p-4">
+                            <div class="text-sm font-bold">${item.kh}</div>
+                            <div class="text-amber-400 text-xs">${item.title}</div>
+                        </div>
+                    </div>`;
+                card.onclick = () => openVideo(item.url);
+                proTrailerRow.appendChild(card);
             });
         }
 
