@@ -3,485 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naga Flix </title>
-    <link rel="icon" type="images/x-icon" href="./image.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Naga Flix</title>
+    <link rel="icon" type="images/x-icon" href="./image copy.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bayon&family=Black+Ops+One&family=Fasthand&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Supermercado+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
-        :root { --gold: #facc15; }
-        
-        /* Theme Variables */
-        .light-theme {
-            --bg-color: #ffffff;
-            --text-color: #09090b;
-            --nav-bg: rgba(255, 255, 255, 0.8);
-            --card-bg: #f4f4f5;
-            --border-color: rgba(0, 0, 0, 0.1);
-            --input-bg: #f4f4f5;
-            --footer-bg: #f4f4f5;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Bayon&family=Fasthand&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Supermercado+One&display=swap');
+        :root{--gold:#facc15}
+        .light-theme{--bg-color:#ffffff;--text-color:#09090b;--nav-bg:rgba(255,255,255,0.8);--card-bg:#f4f4f5;--border-color:rgba(0,0,0,0.1);--input-bg:#f4f4f5;--footer-bg:#f4f4f5}
+        .dark-theme{--bg-color:#09090b;--text-color:#ffffff;--nav-bg:rgba(0,0,0,0.8);--card-bg:#18181b;--border-color:rgba(255,255,255,0.1);--input-bg:#18181b;--footer-bg:#000000}
+        body{background-color:var(--bg-color);color:var(--text-color);transition:background-color .3s,color .3s}
+        nav{background-color:var(--nav-bg)!important;border-color:var(--border-color)!important}
+        .owner-card,.bg-zinc-950,.bg-zinc-900\/50{background-color:var(--card-bg)!important;border-color:var(--border-color)!important}
+        input,textarea{background-color:var(--input-bg)!important;border-color:var(--border-color)!important;color:var(--text-color)!important}
+        footer{background-color:var(--footer-bg)!important;border-color:var(--border-color)!important}
+        .nav-link{color:var(--text-color)!important;opacity:.7;position:relative}
+        .nav-link:hover{opacity:1}
+        .nav-link:after{content:'';position:absolute;width:0;height:2px;bottom:-2px;left:0;background:#facc15;transition:width .3s}
+        .nav-link:hover:after{width:100%}
+        .tail-container{font-family:"Roboto",sans-serif}
+        .logo-font{font-family:"Supermercado One",sans-serif}
+        .hero-bg{background-size:cover;background-position:center;transition:all .8s}
+        .movie-card{transition:all .4s cubic-bezier(.4,0,.2,1)}
+        .movie-card:hover{transform:scale(1.08) translateY(-8px);z-index:10}
+        .gold-gradient{background:linear-gradient(90deg,#facc15,#fcd34d,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .banner-overlay{background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(9,9,11,1))}
+        .owner-card:hover img{transform:scale(1.1)}
+        .horizontal-scroll::-webkit-scrollbar{height:6px}
+        .horizontal-scroll::-webkit-scrollbar-track{background:#18181b}
+        .horizontal-scroll::-webkit-scrollbar-thumb{background:#3f3f46;border-radius:10px}
 
-        .dark-theme {
-            --bg-color: #09090b;
-            --text-color: #ffffff;
-            --nav-bg: rgba(0, 0, 0, 0.8);
-            --card-bg: #18181b;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --input-bg: #18181b;
-            --footer-bg: #000000;
-        }
+        /* ══ DETAIL PAGE ══ */
+        #detail-page{display:none;position:fixed;inset:0;z-index:200;background:#09090b;overflow-y:auto}
+        #detail-page.visible{display:block}
+        .detail-video-wrap{position:relative;width:100%;padding-top:56.25%}
+        .detail-video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+        .detail-gradient-bottom{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,#09090b)}
+        .detail-body{max-width:960px;margin:0 auto;padding:0 1.5rem 5rem}
 
-        body { background-color: var(--bg-color); color: var(--text-color); transition: background-color 0.3s ease, color 0.3s ease; }
-        nav { background-color: var(--nav-bg) !important; border-color: var(--border-color) !important; }
-        .movie-card .bg-zinc-900 { background-color: var(--card-bg) !important; }
-        .owner-card, .bg-zinc-950, .bg-zinc-900\/50 { background-color: var(--card-bg) !important; border-color: var(--border-color) !important; }
-        input, textarea { background-color: var(--input-bg) !important; border-color: var(--border-color) !important; color: var(--text-color) !important; }
-        footer { background-color: var(--footer-bg) !important; border-color: var(--border-color) !important; }
-        .nav-link { color: var(--text-color) !important; opacity: 0.7; }
-        .nav-link:hover { opacity: 1; }
+        /* movie hero banner (for full movies) */
+        .movie-banner{position:relative;width:100%;height:420px;background-size:cover;background-position:center top}
+        .movie-banner-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.3) 0%,rgba(9,9,11,1) 100%)}
 
-        .tail-container {  font-family: "Roboto", sans-serif; }
-        .logo-font { font-family: "Supermercado One", sans-serif; }
-        .hero-bg { background-size: cover; background-position: center; transition: all 0.8s ease; }
-        .movie-card { transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1); }
-        .movie-card:hover { transform: scale(1.08) translateY(-8px); z-index: 10; }
-        .nav-link { position: relative; }
-        .nav-link:after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0; background-color: #facc15; transition: width 0.3s ease; }
-        .nav-link:hover:after { width: 100%; }
-        .gold-gradient { background: linear-gradient(90deg, #facc15, #fcd34d, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .banner-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(9, 9, 11, 1)); }
-        .owner-card:hover img { transform: scale(1.1); }
-        .horizontal-scroll::-webkit-scrollbar { height: 6px; }
-        
-        .horizontal-scroll::-webkit-scrollbar-track { background: #18181b; }
-        .horizontal-scroll::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
+        /* action buttons */
+        .like-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;border:1.5px solid rgba(255,255,255,.15);background:transparent;color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
+        .like-btn:hover{border-color:#facc15;color:#facc15}
+        .like-btn.liked{background:#facc15;border-color:#facc15;color:#000}
+        .action-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;border:1.5px solid rgba(255,255,255,.15);background:transparent;color:#a1a1aa;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
+        .action-btn:hover{border-color:#fff;color:#fff}
+        .watch-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 28px;border-radius:14px;background:#facc15;color:#000;font-size:15px;font-weight:800;cursor:pointer;border:none;transition:all .2s}
+        .watch-btn:hover{background:#fbbf24;transform:scale(1.03)}
+        .watchlist-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:14px;background:#27272a;color:#fff;font-size:14px;font-weight:700;cursor:pointer;border:1px solid #3f3f46;transition:all .2s}
+        .watchlist-btn:hover{background:#3f3f46}
+        .watchlist-btn.added{background:#facc15;color:#000;border-color:#facc15}
+
+        /* stars */
+        .star-row{display:flex;align-items:center;gap:6px}
+        .star{font-size:28px;cursor:pointer;color:#3f3f46;transition:color .15s,transform .15s}
+        .star:hover,.star.active{color:#facc15}
+        .star:hover{transform:scale(1.25)}
+        .avg-bar{height:6px;background:#27272a;border-radius:999px;overflow:hidden}
+        .avg-fill{height:100%;background:linear-gradient(90deg,#facc15,#fbbf24);border-radius:999px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+        /* comment */
+        .comment-input{width:100%;background:#18181b;border:1.5px solid #27272a;border-radius:14px;padding:14px 16px;color:#fff;font-size:14px;font-family:inherit;resize:none;outline:none;transition:border-color .2s}
+        .comment-input:focus{border-color:#facc15}
+        .comment-card{background:#18181b;border:1px solid #27272a;border-radius:16px;padding:16px 18px;transition:border-color .2s}
+        .comment-card:hover{border-color:#3f3f46}
+        .comment-like-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#71717a;cursor:pointer;padding:4px 8px;border-radius:6px;border:none;background:transparent;transition:color .15s}
+        .comment-like-btn:hover,.comment-like-btn.active{color:#facc15}
+
+        /* back btn */
+        .back-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s}
+        .back-btn:hover{background:rgba(255,255,255,.14)}
+
+        /* genre pill */
+        .genre-pill{background:#27272a;color:#a1a1aa;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+        .pro-pill{background:linear-gradient(90deg,#facc15,#f59e0b);color:#000;font-size:11px;font-weight:800;padding:4px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+
+        /* info grid */
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:#27272a;border-radius:16px;overflow:hidden}
+        .info-cell{background:#18181b;padding:14px 16px;text-align:center}
+        .info-cell .label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#52525b;margin-bottom:4px}
+        .info-cell .val{font-size:15px;font-weight:700;color:#fff}
+
+        /* cast */
+        .cast-chip{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:70px}
+        .cast-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3f3f46,#27272a);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#a1a1aa;overflow:hidden;border:2px solid #27272a;transition:border-color .2s}
+        .cast-chip:hover .cast-avatar{border-color:#facc15}
+        .cast-name{font-size:10px;color:#71717a;text-align:center;white-space:nowrap}
+
+        /* tabs */
+        .tab-btn{padding:8px 18px;border-radius:999px;font-size:13px;font-weight:700;border:1.5px solid transparent;cursor:pointer;transition:all .2s;color:#71717a;background:transparent}
+        .tab-btn.active{background:#facc15;color:#000;border-color:#facc15}
+        .tab-btn:hover:not(.active){border-color:#3f3f46;color:#fff}
+
+        /* pop anim */
+        @keyframes likePop{0%{transform:scale(1)}40%{transform:scale(1.4)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+        .pop{animation:likePop .35s ease}
+
+        /* toast */
+        #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(60px);background:#facc15;color:#000;font-weight:700;font-size:13px;padding:10px 24px;border-radius:999px;opacity:0;transition:all .35s;z-index:9999;pointer-events:none}
+        #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
     </style>
 </head>
-<body class="tail-container bg-zinc-950 text-white overflow-x-hidden ">
+<body class="tail-container bg-zinc-950 text-white overflow-x-hidden">
 
-    <!-- NAVBAR -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-screen-2xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-x-3 shrink-0">
-                <!-- LOGO IMAGE -->
-                <a href="#" class="flex items-center  md:gap-3 transform active:scale-95 active:opacity-80 transition-all duration-200" >
-                    <img src="image.png" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-lg " >
-                    <div class="flex items-baseline" >
-                        <span class="logo-font text-2xl md:text-4xl font-bold tracking-tighter gold-gradient" >Naga</span>
-                        <span class="logo-font text-xl md:text-4xl font-bold tracking-tighter text-white"  >Flix</span>
-                    </div>
-                </a>
+<!-- ══ NAVBAR ══ -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-x-3 shrink-0">
+            <a href="#" class="flex items-center md:gap-3 transform active:scale-95 active:opacity-80 transition-all duration-200">
+                <img src="image.png" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 rounded-full">
+                <div class="flex items-baseline">
+                    <span class="logo-font text-2xl md:text-4xl font-bold tracking-tighter gold-gradient">Naga</span>
+                    <span class="logo-font text-xl md:text-4xl font-bold tracking-tighter text-white">Flix</span>
+                </div>
+            </a>
+        </div>
+        <div class="hidden xl:flex items-center gap-x-8 text-sm font-medium">
+            <a href="#" class="nav-link text-white">Home</a>
+            <a href="#trending" class="nav-link">Trailers</a>
+            <a href="#movies" class="nav-link">Movies</a>
+            <a href="#pro" class="nav-link">Movie Pro</a>
+            <a href="#pricing" class="nav-link">Subscriptions</a>
+            <a href="#owner" class="nav-link">Meet Owner</a>
+        </div>
+        <div class="hidden lg:flex items-center flex-1 max-w-md">
+            <div class="relative w-full group">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-amber-400 transition-colors"></i>
+                <input type="text" id="movie-search" onkeyup="handleSearch(this.value)" placeholder="Search movies, trailers..." class="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-2.5 pl-11 pr-4 text-sm text-white focus:border-amber-400/50 focus:bg-zinc-900 outline-none transition-all placeholder:text-zinc-600">
             </div>
-
-            <div class="hidden xl:flex items-center gap-x-8 text-sm font-medium">
-                <a href="#" class="nav-link text-white">Home</a>
-                <a href="#trending" class="nav-link text-zinc-400 hover:text-white">Trailers</a>
-                <a href="#movies" class="nav-link text-zinc-400 hover:text-white">Movies</a>
-                <a href="#pro" class="nav-link text-zinc-400 hover:text-white">Movie Pro</a>
-                <a href="#pricing" class="nav-link text-zinc-400 hover:text-white">Subscriptions</a>
-                <a href="#owner" class="nav-link text-zinc-400 hover:text-white">Meet Owner</a>
-            </div>
-
-            <!-- SEARCH BAR -->
-            <div class="hidden lg:flex items-center flex-1 max-w-md">
-                <div class="relative w-full group">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-amber-400 transition-colors"></i>
-                    <input type="text" 
-                           id="movie-search"
-                           onkeyup="handleSearch(this.value)"
-                           placeholder="Search movies, trailers..." 
-                           class="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-2 md:py-2.5 pl-11 pr-4 text-sm text-white focus:border-amber-400/50 focus:bg-zinc-900 outline-none transition-all placeholder:text-zinc-600">
+        </div>
+        <div class="flex items-center gap-x-2 md:gap-x-4 shrink-0">
+            <button onclick="toggleTheme()" class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-zinc-800/50 flex items-center justify-center text-amber-400 hover:bg-zinc-800 transition-all border border-white/10">
+                <i id="theme-icon" class="fa-solid fa-moon text-sm md:text-base"></i>
+            </button>
+            <button onclick="toggleMobileMenu()" class="lg:hidden w-9 h-9 rounded-xl bg-zinc-800/50 flex items-center justify-center text-white border border-white/10">
+                <i id="menu-icon" class="fa-solid fa-bars"></i>
+            </button>
+            <a href="#pricing" class="hidden sm:flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-amber-400 px-4 py-2 rounded-xl text-sm font-bold transition-all border border-amber-400/20">
+                <i class="fa-solid fa-crown"></i> Get Pro
+            </a>
+            <button id="nav-signin-btn" onclick="openAuthModal('signin')" class="hidden sm:block bg-amber-400 hover:bg-amber-300 text-black px-4 md:px-6 py-2 rounded-xl text-sm font-bold transition-all">Sign In</button>
+            <div id="nav-profile-ui" class="hidden relative">
+                <button onclick="toggleProfileDropdown()" class="w-8 h-8 md:w-9 md:h-9 rounded-full overflow-hidden border-2 border-amber-400"><img src="./image4.png" class="w-full h-full object-cover"></button>
+                <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl py-2 shadow-2xl">
+                    <button onclick="handleLogout()" class="w-full text-left px-4 py-2 hover:bg-zinc-800 text-red-400 text-sm">Sign Out</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-zinc-950 border-t border-white/10 px-6 py-6 space-y-6">
+        <div class="flex flex-col gap-y-4">
+            <a href="#" onclick="toggleMobileMenu()" class="text-lg font-medium text-white">Home</a>
+            <a href="#trending" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Trailers</a>
+            <a href="#movies" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Movies</a>
+            <a href="#pro" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Movie Pro</a>
+            <a href="#pricing" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Subscriptions</a>
+            <a href="#owner" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Meet Owner</a>
+        </div>
+        <div class="relative w-full">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
+            <input type="text" onkeyup="handleSearch(this.value)" placeholder="Search..." class="w-full bg-zinc-900 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white outline-none">
+        </div>
+        <button onclick="openAuthModal('signin');toggleMobileMenu()" class="w-full bg-amber-400 text-black py-4 rounded-xl font-bold">Sign In</button>
+    </div>
+</nav>
 
-            <div id="auth-ui-container" class="flex items-center gap-x-2 md:gap-x-4 shrink-0">
-                <!-- THEME TOGGLE -->
-                <button onclick="toggleTheme()" class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-zinc-800/50 flex items-center justify-center text-amber-400 hover:bg-zinc-800 transition-all border border-white/10" title="Toggle Day/Dark Mode">
-                    <i id="theme-icon" class="fa-solid fa-moon text-sm md:text-base"></i>
+<!-- ══ HERO ══ -->
+<div id="hero-section" class="relative h-screen">
+    <div id="hero-bg" class="hero-bg absolute inset-0 flex items-center" style="background-image:url('https://scontent.fpnh18-1.fna.fbcdn.net/v/t39.30808-6/694973536_977506471687129_8989255514275114639_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEJttkVYyQ-BmXq22Iz-FUspdp8RI1UGrGl2nxEjVQasZqoxNIHwVuoQJ6UFCSaigpbJyUssdZHSuwOVLtw9Gk-&_nc_ohc=deZZLvj1kK4Q7kNvwHc2rWS&_nc_oc=Adp-9UtJWrjzu1Xfjs_Q3JYmxLMYsKn8eYShYn3YXAgFuGYBpehZpMsqz96wwakFbgM&_nc_zt=23&_nc_ht=scontent.fpnh18-1.fna&_nc_gid=bPaKeQL__PtYOJTVXhIXrA&_nc_ss=7b2a8&oh=00_Af71EKdJEBFBqnlMaWAfqRCh-t7LzFtWboSXEtJPw9b4tg&oe=6A0B8F48')">
+        <div class="banner-overlay absolute inset-0"></div>
+        <div class="relative z-10 max-w-2xl px-8 md:ml-12 pt-20">
+            <span class="bg-amber-400 text-black text-xs font-bold px-3 py-1 rounded mb-4 inline-block">FEATURED 2026</span>
+            <h1 id="hero-title" class="text-6xl md:text-7xl font-bold tracking-tighter mb-4" style='font-family:"Fasthand",cursive'>សត្រូវព្រាយ</h1>
+            <p id="hero-desc" class="text-zinc-300 max-w-md mb-8 text-lg">Experience the legendary tale of Cambodia's last guardian. Exclusive 4K Trailer available now.</p>
+            <div class="flex flex-wrap gap-4">
+                <button id="hero-play-btn" class="bg-white hover:bg-zinc-200 text-black font-bold px-8 py-4 rounded-xl flex items-center gap-3 transform active:scale-95 transition-all">
+                    <i class="fa-solid fa-play"></i> Watch Trailer
                 </button>
-                
-                <!-- MOBILE MENU BUTTON -->
-                <button onclick="toggleMobileMenu()" class="lg:hidden w-9 h-9 rounded-xl bg-zinc-800/50 flex items-center justify-center text-white border border-white/10">
-                    <i id="menu-icon" class="fa-solid fa-bars"></i>
-                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <a href="#pricing" class="hidden sm:flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-amber-400 px-4 py-2 rounded-xl text-sm font-bold transition-all border border-amber-400/20">
-                    <i class="fa-solid fa-crown"></i>
-                    Get Pro
-                </a>
-                <button id="nav-signin-btn" onclick="openAuthModal('signin')" class="hidden sm:block bg-amber-400 hover:bg-amber-300 text-black px-4 md:px-6 py-2 rounded-xl text-sm font-bold transition-all">Sign In</button>
-                
-                <div id="nav-profile-ui" class="hidden relative">
-                    <button onclick="toggleProfileDropdown()" class="w-8 h-8 md:w-9 md:h-9 rounded-full overflow-hidden border-2 border-amber-400"><img src="./image2.png" class="w-full h-full object-cover"></button>
-                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl py-2 shadow-2xl">
-                        <button onclick="handleLogout()" class="w-full text-left px-4 py-2 hover:bg-zinc-800 text-red-400 text-sm">Sign Out</button>
+<!-- ══ TRAILERS ROW ══ -->
+<div id="trending" class="max-w-screen-2xl mx-auto px-6 space-y-16 -mt-32 relative z-20 pb-10">
+    <div>
+        <h2 class="text-3xl font-semibold gold-gradient mb-6">Featured Trailers 🔥</h2>
+        <div id="trending-row" class="flex gap-4 overflow-x-auto horizontal-scroll pb-4"></div>
+    </div>
+</div>
+
+<!-- ══ FULL MOVIES GRID ══ -->
+<div id="movies" class="max-w-screen-2xl mx-auto px-6 space-y-16 relative z-20 pb-20">
+    <div>
+        <h2 class="text-3xl font-semibold gold-gradient mb-6">Explore Full Movies 🎬</h2>
+        <div id="movies-row" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"></div>
+    </div>
+</div>
+
+<!-- ══ MOVIE PRO ══ -->
+<div id="pro" class="bg-zinc-950 py-20 border-y border-zinc-900">
+    <div class="max-w-screen-2xl mx-auto px-6">
+        <div class="flex items-center justify-between mb-10">
+            <div>
+                <h2 class="text-4xl font-bold gold-gradient flex items-center gap-3">Movie Pro </h2>
+                <p class="text-zinc-400 mt-2">Unlock exclusive 4K content, early access, and no ads.</p>
+            </div>
+            <a href="#pricing" class="hidden md:block text-amber-400 hover:text-amber-300 font-bold text-sm underline decoration-2 underline-offset-8">View All Benefits</a>
+        </div>
+        <div class="mb-20">
+            <h3 class="text-xl font-bold text-white mb-8 flex items-center gap-2"><i class="fa-solid fa-fire text-amber-400"></i> Pro Sneak Peeks</h3>
+            <div id="pro-trailers-row" class="flex gap-6 overflow-x-auto horizontal-scroll pb-6"></div>
+        </div>
+        <div class="mb-20">
+            <h3 class="text-xl font-bold text-white mb-8 flex items-center gap-2"><i class="fa-solid fa-star text-amber-400"></i> Pro Exclusives</h3>
+            <div id="pro-movies-row" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-zinc-900/50 p-8 rounded-3xl border border-amber-400/10 hover:border-amber-400/40 transition-all group"><div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform"><i class="fa-solid fa-bolt-lightning text-xl"></i></div><h3 class="text-xl font-bold mb-3">Ultra Fast Streaming</h3><p class="text-zinc-500 text-sm leading-relaxed">Experience zero buffering with dedicated high-speed servers optimized for 4K streaming.</p></div>
+            <div class="bg-zinc-900/50 p-8 rounded-3xl border border-amber-400/10 hover:border-amber-400/40 transition-all group"><div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform"><i class="fa-solid fa-clapperboard text-xl"></i></div><h3 class="text-xl font-bold mb-3">Early Access</h3><p class="text-zinc-500 text-sm leading-relaxed">Watch the latest Khmer blockbusters 48 hours before anyone else.</p></div>
+            <div class="bg-zinc-900/50 p-8 rounded-3xl border border-amber-400/10 hover:border-amber-400/40 transition-all group"><div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform"><i class="fa-solid fa-download text-xl"></i></div><h3 class="text-xl font-bold mb-3">Offline Downloads</h3><p class="text-zinc-500 text-sm leading-relaxed">Download your favorites to watch anywhere, even without internet.</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ PRICING ══ -->
+<section id="pricing" class="py-24 bg-black">
+    <div class="max-w-screen-2xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold logo-font gold-gradient mb-4">Choose Your Plan</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto">Get unlimited access to NagaFlix with flexible subscription options.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="bg-zinc-900/30 p-10 rounded-[2.5rem] border border-zinc-800 hover:border-amber-400/30 transition-all">
+                <div class="mb-8"><h3 class="text-2xl font-bold mb-2">Monthly Pro</h3><div class="flex items-baseline gap-1"><span class="text-5xl font-bold">$4.99</span><span class="text-zinc-500">/month</span></div></div>
+                <ul class="space-y-4 mb-10"><li class="flex items-center gap-3 text-zinc-300"><i class="fa-solid fa-circle-check text-amber-400"></i> Unlimited 4K Streaming</li><li class="flex items-center gap-3 text-zinc-300"><i class="fa-solid fa-circle-check text-amber-400"></i> No Advertisements</li><li class="flex items-center gap-3 text-zinc-300"><i class="fa-solid fa-circle-check text-amber-400"></i> Cancel Anytime</li></ul>
+                <button class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-4 rounded-2xl transition-all">Start 7-Day Free Trial</button>
+            </div>
+            <div class="bg-zinc-900/30 p-10 rounded-[2.5rem] border-2 border-amber-400 shadow-2xl shadow-amber-400/10 relative">
+                <div class="absolute top-6 right-6 bg-amber-400 text-black text-[10px] font-black px-3 py-1 rounded-full uppercase">Best Value</div>
+                <div class="mb-8"><h3 class="text-2xl font-bold mb-2">Yearly Pro</h3><div class="flex items-baseline gap-1"><span class="text-5xl font-bold">$45.00</span><span class="text-zinc-500">/year</span></div><p class="text-amber-400 text-xs font-bold mt-2">Save $15 per year!</p></div>
+                <ul class="space-y-4 mb-10"><li class="flex items-center gap-3 text-zinc-300"><i class="fa-solid fa-circle-check text-amber-400"></i> Everything in Monthly</li><li class="flex items-center gap-3 text-zinc-300"><i class="fa-solid fa-circle-check text-amber-400"></i> 2 Months Free</li><li class="flex items-center gap-3 text-zinc-300"><i class="fa-solid fa-circle-check text-amber-400"></i> Early Access to Premiers</li></ul>
+                <button class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-4 rounded-2xl transition-all">Get Yearly Pro</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ OWNER ══ -->
+<section id="owner" class="bg-zinc-900/50 py-24 border-y border-zinc-800">
+    <div class="max-w-screen-2xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold logo-font gold-gradient mb-4">Meet the Owner</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto">The visionary behind NagaFlix, dedicated to bringing the best entertainment to Cambodia.</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+            <div class="owner-card bg-zinc-950 p-8 rounded-3xl border border-zinc-800 text-center transition-all hover:border-amber-400/50 group">
+                <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-amber-400/20 group-hover:border-amber-400 transition-all"><img src="./image4.png" class="w-full h-full object-cover transition-transform duration-500" alt="Somnang Yom"></div>
+                <h3 class="text-3xl font-bold mb-1">Somnang Yom</h3>
+                <p class="text-amber-400 text-lg font-medium mb-6">Student at RUPP</p>
+                <div class="space-y-6 text-left">
+                    <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50"><h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">About NagaFlix</h4><p class="text-zinc-300 text-sm leading-relaxed">Welcome to NagaFlix — where legendary entertainment begins. Stream trending movies, thrilling series, and cinematic adventures all in one place.</p></div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50"><h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Cinematic Vision</h4><p class="text-zinc-400 text-xs leading-relaxed">A place for film lovers to discover action, drama, horror, and comedy.</p></div>
+                        <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50"><h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Modern Tech</h4><p class="text-zinc-400 text-xs leading-relaxed">Bringing the best streaming experience with fast access and modern design.</p></div>
                     </div>
+                    <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50"><h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Khmer Pride</h4><p class="text-zinc-400 text-xs leading-relaxed">Bringing Khmer creativity and global entertainment together. Movies. Entertainment. Endless streaming.</p></div>
                 </div>
             </div>
-        </div>
-
-        <!-- MOBILE MENU OVERLAY -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-zinc-950 border-t border-white/10 px-6 py-6 space-y-6">
-            <div class="flex flex-col gap-y-4">
-                <a href="#" onclick="toggleMobileMenu()" class="text-lg font-medium text-white">Home</a>
-                <a href="#trending" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Trailers</a>
-                <a href="#movies" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Movies</a>
-                <a href="#pro" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Movie Pro</a>
-                <a href="#pricing" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Subscriptions</a>
-                <a href="#owner" onclick="toggleMobileMenu()" class="text-lg font-medium text-zinc-400">Meet Owner</a>
+            <div class="owner-card bg-zinc-950 p-8 rounded-3xl border border-zinc-800 text-center transition-all hover:border-amber-400/50 group">
+                <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-amber-400/20 group-hover:border-amber-400 transition-all"><img src="./image4.png" class="w-full h-full object-cover transition-transform duration-500" alt="Somnang Yom"></div>
+                <h3 class="text-3xl font-bold mb-1">Li Na</h3>
+                <p class="text-amber-400 text-lg font-medium mb-6">Student at RUPP</p>
+                <div class="space-y-6 text-left">
+                    <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50"><h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">About NagaFlix</h4><p class="text-zinc-300 text-sm leading-relaxed">Welcome to NagaFlix — where legendary entertainment begins. Stream trending movies, thrilling series, and cinematic adventures all in one place.</p></div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50"><h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Cinematic Vision</h4><p class="text-zinc-400 text-xs leading-relaxed">A place for film lovers to discover action, drama, horror, and comedy.</p></div>
+                        <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50"><h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Modern Tech</h4><p class="text-zinc-400 text-xs leading-relaxed">Bringing the best streaming experience with fast access and modern design.</p></div>
+                    </div>
+                    <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50"><h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Khmer Pride</h4><p class="text-zinc-400 text-xs leading-relaxed">Bringing Khmer creativity and global entertainment together. Movies. Entertainment. Endless streaming.</p></div>
+                </div>
             </div>
-            <!-- MOBILE SEARCH -->
-            <div class="relative w-full">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
-                <input type="text" 
-                       onkeyup="handleSearch(this.value)"
-                       placeholder="Search..." 
-                       class="w-full bg-zinc-900 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-white outline-none">
-            </div>
-            <button onclick="openAuthModal('signin'); toggleMobileMenu()" class="w-full bg-amber-400 text-black py-4 rounded-xl font-bold">Sign In</button>
-        </div>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <div id="hero-section" class="relative h-screen">
-        <div id="hero-bg" class="hero-bg absolute inset-0 flex items-center transition-all duration-1000" style="background-image: url('https://scontent.fpnh18-1.fna.fbcdn.net/v/t39.30808-6/694973536_977506471687129_8989255514275114639_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEJttkVYyQ-BmXq22Iz-FUspdp8RI1UGrGl2nxEjVQasZqoxNIHwVuoQJ6UFCSaigpbJyUssdZHSuwOVLtw9Gk-&_nc_ohc=deZZLvj1kK4Q7kNvwHc2rWS&_nc_oc=Adp-9UtJWrjzu1Xfjs_Q3JYmxLMYsKn8eYShYn3YXAgFuGYBpehZpMsqz96wwakFbgM&_nc_zt=23&_nc_ht=scontent.fpnh18-1.fna&_nc_gid=bPaKeQL__PtYOJTVXhIXrA&_nc_ss=7b2a8&oh=00_Af71EKdJEBFBqnlMaWAfqRCh-t7LzFtWboSXEtJPw9b4tg&oe=6A0B8F48')">
-            <div class="banner-overlay absolute inset-0"></div>
-            <div class="relative z-10 max-w-2xl px-8 md:ml-12 pt-20">
-                <span class="bg-amber-400 text-black text-xs font-bold px-3 py-1 rounded mb-4 inline-block">FEATURED 2026</span>
-                <h1 id="hero-title" class="text-6xl md:text-7xl font-bold logo-font tracking-tighter mb-4" style='font-family: "Fasthand", cursive;'>សត្រូវព្រាយ</h1>
-                <p id="hero-desc" class="text-zinc-300 max-w-md mb-8 text-lg">Experience the legendary tale of Cambodia's last guardian. Exclusive 4K Trailer available now.</p>
-                <div class="flex flex-wrap gap-4">
-                    <button id="hero-play-btn" onclick="openVideo('https://www.youtube.com/embed/00rW1_twWhI')" class="bg-white hover:bg-zinc-200 text-black font-bold px-8 py-4 rounded-xl flex items-center gap-3 transform active:scale-95 transition-all">
-                        <i class="fa-solid fa-play"></i> Watch Trailer
-                    <!-- </button>
-                    <button onclick="reloadHero()" class="bg-zinc-800/50 hover:bg-zinc-800 text-white border border-white/10 px-6 py-4 rounded-xl flex items-center gap-3 transform active:scale-95 transition-all backdrop-blur-sm">
-                        <i class="fa-solid fa-rotate-right"></i> Reload
-                    </button> -->
+            <div class="bg-zinc-950 p-8 rounded-3xl border border-zinc-800 h-full">
+                <h3 class="text-2xl font-bold mb-2 gold-gradient">Contact Us</h3>
+                <p class="text-zinc-400 text-sm mb-8">Have questions or suggestions? We'd love to hear from you.</p>
+                <form class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Full Name</label><input type="text" placeholder="Your Name" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all"></div>
+                        <div><label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Email Address</label><input type="email" placeholder="email@example.com" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all"></div>
+                    </div>
+                    <div><label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Subject</label><input type="text" placeholder="How can we help?" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all"></div>
+                    <div><label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Message</label><textarea rows="4" placeholder="Write your message here..." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all resize-none"></textarea></div>
+                    <button type="button" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-4 rounded-xl transition-all">Send Message</button>
+                </form>
+                <div class="mt-10 pt-10 border-t border-zinc-900 flex flex-col gap-4">
+                    <div class="flex items-center gap-4 text-zinc-400"><div class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-amber-400"><i class="fa-solid fa-envelope"></i></div><div><p class="text-xs text-zinc-500 uppercase font-bold">Email Us</p><p class="text-sm">support@nagaflix.com</p></div></div>
+                    <div class="flex items-center gap-4 text-zinc-400"><div class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-amber-400"><i class="fa-solid fa-location-dot"></i></div><div><p class="text-xs text-zinc-500 uppercase font-bold">Location</p><p class="text-sm">Phnom Penh, Cambodia</p></div></div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- MOVIE ROWS (TRAILERS) -->
-    <div id="trending" class="max-w-screen-2xl mx-auto px-6 space-y-16 -mt-32 relative z-20 pb-10">
-        <div>
-            <h2 class="text-3xl font-semibold gold-gradient mb-6">Featured Trailers 🔥</h2>
-            <div id="trending-row" class="flex gap-4 overflow-x-auto horizontal-scroll pb-4">
-                <!-- Trailer cards populated by script -->
-            </div>
+
+<!-- ══ FOLLOW ══ -->
+<section class="bg-black py-12 border-b border-zinc-900">
+    <div class="max-w-screen-2xl mx-auto px-6 text-center">
+        <h3 class="text-4xl font-bold gold-gradient mb-8" style='font-family:"Supermercado One",sans-serif'>Follow Us!</h3>
+        <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+            <a href="https://www.facebook.com/share/1DPvuyn1BH/" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110"><div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#1877F2] group-hover:text-white transition-all"><i class="fa-brands fa-facebook-f text-2xl"></i></div><span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Facebook</span></a>
+            <a href="https://www.instagram.com/somnang_yom" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110"><div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-gradient-to-tr group-hover:from-[#f9ce34] group-hover:via-[#ee2a7b] group-hover:to-[#6228d7] group-hover:text-white transition-all"><i class="fa-brands fa-instagram text-2xl"></i></div><span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Instagram</span></a>
+            <a href="https://www.tiktok.com/@shokubutsu_0" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110"><div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-black group-hover:text-white group-hover:border group-hover:border-zinc-700 transition-all"><i class="fa-brands fa-tiktok text-2xl"></i></div><span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">TikTok</span></a>
+            <a href="https://t.me/somnangyom" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110"><div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#26A5E4] group-hover:text-white transition-all"><i class="fa-brands fa-telegram text-2xl"></i></div><span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Telegram</span></a>
         </div>
     </div>
+</section>
 
-    <!-- MOVIE SECTION (FULL MOVIES) -->
-    <div id="movies" class="max-w-screen-2xl mx-auto px-6 space-y-16 relative z-20 pb-20">
-        <div>
-            <h2 class="text-3xl font-semibold gold-gradient mb-6">Explore Full Movies 🎬</h2>
-            <div id="movies-row" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <!-- Movie cards populated by script -->
-            </div>
-        </div>
-    </div>
 
-    <!-- MOVIE PRO SECTION -->
-    <div id="pro" class="bg-zinc-950 py-20 border-y border-zinc-900">
-        <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="flex items-center justify-between mb-10">
-                <div>
-                    <h2 class="text-4xl font-bold gold-gradient flex items-center gap-3">
-                        Movie Pro <span class="bg-amber-400 text-black text-[10px] px-2 py-0.5 rounded-full uppercase tracking-tighter">Premium</span>
-                    </h2>
-                    <p class="text-zinc-400 mt-2">Unlock exclusive 4K content, early access, and no ads.</p>
-                </div>
-                <a href="#pricing" class="hidden md:block text-amber-400 hover:text-amber-300 font-bold text-sm underline decoration-2 underline-offset-8 transition-all">View All Benefits</a>
-            </div>
-            
-            <!-- PRO EXCLUSIVE TRAILERS -->
-            <div class="mb-20">
-                <h3 class="text-xl font-bold text-white mb-8 flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-amber-400"></i> Pro Sneak Peeks
-                </h3>
-                <div id="pro-trailers-row" class="flex gap-6 overflow-x-auto horizontal-scroll pb-6">
-                    <!-- Pro trailer cards populated by script -->
-                </div>
-            </div>
-
-            <!-- PRO EXCLUSIVE MOVIES GRID -->
-            <div class="mb-20">
-                <h3 class="text-xl font-bold text-white mb-8 flex items-center gap-2">
-                    <i class="fa-solid fa-star text-amber-400"></i> Pro Exclusives
-                </h3>
-                <div id="pro-movies-row" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                    <!-- Pro movie cards populated by script -->
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Pro Feature 1 -->
-                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-amber-400/10 hover:border-amber-400/40 transition-all group">
-                    <div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-bolt-lightning text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Ultra Fast Streaming</h3>
-                    <p class="text-zinc-500 text-sm leading-relaxed">Experience zero buffering with our dedicated high-speed servers optimized for 4K streaming.</p>
-                </div>
-                <!-- Pro Feature 2 -->
-                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-amber-400/10 hover:border-amber-400/40 transition-all group">
-                    <div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-clapperboard text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Early Access</h3>
-                    <p class="text-zinc-500 text-sm leading-relaxed">Watch the latest Khmer blockbusters and international series 48 hours before anyone else.</p>
-                </div>
-                <!-- Pro Feature 3 -->
-                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-amber-400/10 hover:border-amber-400/40 transition-all group">
-                    <div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-download text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Offline Downloads</h3>
-                    <p class="text-zinc-500 text-sm leading-relaxed">Download your favorite movies and series to watch anytime, anywhere, even without internet.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PRICING SECTION -->
-    <section id="pricing" class="py-24 bg-black">
-        <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold logo-font gold-gradient mb-4">Choose Your Plan</h2>
-                <p class="text-zinc-400 max-w-xl mx-auto">Get unlimited access to NagaFlix with our flexible subscription options.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Monthly Plan -->
-                <div class="bg-zinc-900/30 p-10 rounded-[2.5rem] border border-zinc-800 hover:border-amber-400/30 transition-all relative overflow-hidden group">
-                    <div class="mb-8">
-                        <h3 class="text-2xl font-bold mb-2">Monthly Pro</h3>
-                        <div class="flex items-baseline gap-1">
-                            <span class="text-5xl font-bold text-white">$4.99</span>
-                            <span class="text-zinc-500">/month</span>
-                        </div>
-                    </div>
-                    <ul class="space-y-4 mb-10">
-                        <li class="flex items-center gap-3 text-zinc-300">
-                            <i class="fa-solid fa-circle-check text-amber-400"></i> Unlimited 4K Streaming
-                        </li>
-                        <li class="flex items-center gap-3 text-zinc-300">
-                            <i class="fa-solid fa-circle-check text-amber-400"></i> No Advertisements
-                        </li>
-                        <li class="flex items-center gap-3 text-zinc-300">
-                            <i class="fa-solid fa-circle-check text-amber-400"></i> Cancel Anytime
-                        </li>
-                    </ul>
-                    <button class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-4 rounded-2xl transition-all">Start 7-Day Free Trial</button>
-                </div>
-
-                <!-- Yearly Plan -->
-                <div class="bg-zinc-900/30 p-10 rounded-[2.5rem] border-2 border-amber-400 shadow-2xl shadow-amber-400/10 transition-all relative overflow-hidden group">
-                    <div class="absolute top-6 right-6 bg-amber-400 text-black text-[10px] font-black px-3 py-1 rounded-full uppercase">Best Value</div>
-                    <div class="mb-8">
-                        <h3 class="text-2xl font-bold mb-2">Yearly Pro</h3>
-                        <div class="flex items-baseline gap-1">
-                            <span class="text-5xl font-bold text-white">$45.00</span>
-                            <span class="text-zinc-500">/year</span>
-                        </div>
-                        <p class="text-amber-400 text-xs font-bold mt-2">Save $15 per year!</p>
-                    </div>
-                    <ul class="space-y-4 mb-10">
-                        <li class="flex items-center gap-3 text-zinc-300">
-                            <i class="fa-solid fa-circle-check text-amber-400"></i> Everything in Monthly
-                        </li>
-                        <li class="flex items-center gap-3 text-zinc-300">
-                            <i class="fa-solid fa-circle-check text-amber-400"></i> 2 Months Free
-                        </li>
-                        <li class="flex items-center gap-3 text-zinc-300">
-                            <i class="fa-solid fa-circle-check text-amber-400"></i> Early Access to Premiers
-                        </li>
-                    </ul>
-                    <button class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-4 rounded-2xl transition-all">Get Yearly Pro</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MEET THE OWNER SECTION -->
-    <section id="owner" class="bg-zinc-900/50 py-24 border-y border-zinc-800">
-        <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold logo-font gold-gradient mb-4">Meet the Owner</h2>
-                <p class="text-zinc-400 max-w-xl mx-auto">The visionary behind NagaFlix, dedicated to bringing the best entertainment to Cambodia.</p>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
-                <!-- OWNER PROFILE -->
-                <div class="owner-card bg-zinc-950 p-8 rounded-3xl border border-zinc-800 text-center transition-all hover:border-amber-400/50 group">
-                    <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-amber-400/20 group-hover:border-amber-400 transition-all">
-                        <img src="./image2.png" class="w-full h-full object-cover transition-transform duration-500" alt="Somnang Yom">
-                    </div>
-                    <h3 class="text-3xl font-bold mb-1">Somnang Yom</h3>
-                    <p class="text-amber-400 text-lg font-medium mb-6">Student at RUPP</p>
-                    
-                    <div class="space-y-6 text-left">
-                        <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50">
-                            <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">About NagaFlix</h4>
-                            <p class="text-zinc-300 text-sm leading-relaxed">Welcome to NagaFlix — where legendary entertainment begins. Stream trending movies, thrilling series, and cinematic adventures all in one place.</p>
-                        </div>
-                        
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50">
-                                <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Cinematic Vision</h4>
-                                <p class="text-zinc-400 text-xs leading-relaxed">A place for film lovers to discover action, drama, horror, and comedy. Enjoy unlimited entertainment anytime, anywhere.</p>
-                            </div>
-                            <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50">
-                                <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Modern Tech</h4>
-                                <p class="text-zinc-400 text-xs leading-relaxed">Bringing the best streaming experience with fast access, modern design, and amazing content.</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50">
-                            <h4 class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Khmer Pride</h4>
-                            <p class="text-zinc-400 text-xs leading-relaxed">Bringing Khmer creativity and global entertainment together. Movies. Entertainment. Endless streaming.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CONTACT US SECTION -->
-                <div class="bg-zinc-950 p-8 rounded-3xl border border-zinc-800 h-full">
-                    <h3 class="text-2xl font-bold mb-2 gold-gradient">Contact Us</h3>
-                    <p class="text-zinc-400 text-sm mb-8">Have questions or suggestions? We'd love to hear from you.</p>
-                    
-                    <form class="space-y-4">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Full Name</label>
-                                <input type="text" placeholder="Your Name" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Email Address</label>
-                                <input type="email" placeholder="email@example.com" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Subject</label>
-                            <input type="text" placeholder="How can we help?" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-zinc-500 text-xs font-bold mb-2 uppercase">Message</label>
-                            <textarea rows="4" placeholder="Write your message here..." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none transition-all resize-none"></textarea>
-                        </div>
-                        <button type="button" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-4 rounded-xl transition-all transform active:scale-[0.98]">
-                            Send Message
-                        </button>
-                    </form>
-
-                    <div class="mt-10 pt-10 border-t border-zinc-900 flex flex-col gap-4">
-                        <div class="flex items-center gap-4 text-zinc-400">
-                            <div class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-amber-400">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-zinc-500 uppercase font-bold">Email Us</p>
-                                <p class="text-sm">support@nagaflix.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4 text-zinc-400">
-                            <div class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-amber-400">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-zinc-500 uppercase font-bold">Location</p>
-                                <p class="text-sm">Phnom Penh, Cambodia</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOLLOW US SECTION -->
-    <section  class="bg-black py-12 border-b border-zinc-900">
-        <div class="max-w-screen-2xl mx-auto px-6 text-center">
-            <h3 class="text-4xl font-bold gold-gradient mb-8" style='font-family: "Supermercado One", sans-serif;'>Follow Us!</h3>
-            <div class="flex flex-wrap justify-center gap-6 md:gap-10">
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/share/1DPvuyn1BH/?mibextid=wwXIfr" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
-                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#1877F2] group-hover:text-white transition-all shadow-lg">
-                        <i class="fa-brands fa-facebook-f text-2xl"></i>
-                    </div>
-                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Facebook</span>
-                </a>
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/somnang_yom?igsh=MW44NDNvZG85ZW5yYg%3D%3D&utm_source=qr" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
-                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-gradient-to-tr group-hover:from-[#f9ce34] group-hover:via-[#ee2a7b] group-hover:to-[#6228d7] group-hover:text-white transition-all shadow-lg">
-                        <i class="fa-brands fa-instagram text-2xl"></i>
-                    </div>
-                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Instagram</span>
-                </a>
-                <!-- TikTok -->
-                <a href="https://www.tiktok.com/@shokubutsu_0" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
-                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-black group-hover:text-white group-hover:border group-hover:border-zinc-700 transition-all shadow-lg">
-                        <i class="fa-brands fa-tiktok text-2xl"></i>
-                    </div>
-                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">TikTok</span>
-                </a>
-                <!-- Telegram -->
-                <a href="https://t.me/somnangyom" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
-                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#26A5E4] group-hover:text-white transition-all shadow-lg">
-                        <i class="fa-brands fa-telegram text-2xl"></i>
-                    </div>
-                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">Telegram</span>
-                </a>
-                <!-- WhatsApp -->
-                <a href="https://wa.me/0967505304" target="_blank" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
-                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#25D366] group-hover:text-white transition-all shadow-lg">
-                        <i class="fa-brands fa-whatsapp text-2xl"></i>
-                    </div>
-                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">WhatsApp</span>
-                </a>
-                <!-- WeChat -->
-                <a href="weixin://dl/chat?0967505304" class="group flex flex-col items-center gap-2 transition-all hover:scale-110">
-                    <div class="w-14 h-14 rounded-2xl bg-zinc-900 flex items-center justify-center text-zinc-400 group-hover:bg-[#07C160] group-hover:text-white transition-all shadow-lg">
-                        <i class="fa-brands fa-weixin text-2xl"></i>
-                    </div>
-                    <span class="text-[10px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300 tracking-widest">WeChat</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- SUPPORT ME SECTION -->
-    <section class="bg-zinc-950 py-20 border-b border-zinc-900">
-        <div class="max-w-screen-2xl mx-auto px-6 text-center">
-            <h3 class="text-4xl font-bold gold-gradient mb-4" style='font-family: "Supermercado One", sans-serif;'>Support Me</h3>
-            <p class="text-zinc-400 mb-10 max-w-md mx-auto">If you enjoy NagaFlix and want to support my work, you can scan the QR code below to contribute.</p>
-            
-            <div class="inline-block p-4 bg-white rounded-3xl shadow-2xl shadow-amber-400/10 transform hover:scale-105 transition-all duration-500">
-                <div class="bg-zinc-900 p-2 rounded-2xl">
-                    <img src="image3.png" alt="ABA QR Code" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-xl">
-                </div>
-                <div class="mt-4 flex items-center justify-center gap-3">
-                    <div class="w-10 h-10 bg-[#005a8d] rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                        <p style="font-size: 10px;">ABA</p><span style="color: red;">'</span>
-                    </div>
-                    <div class="text-left">
-                        <p class="text-zinc-900 font-bold leading-tight">ABA Bank</p>
-                        <p class="text-zinc-500 text-xs font-medium">Scan to Pay</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 flex flex-wrap justify-center gap-4">
-                <span class="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-zinc-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">Fast Access</span>
-                <span class="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-zinc-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">Safe & Secure</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- SPONSORS SECTION -->
+ <!-- SPONSORS SECTION -->
     <section class="bg-black py-20 border-b border-zinc-900">
         <div class="max-w-screen-2xl mx-auto px-6">
             <div class="text-center mb-12">
@@ -578,374 +420,635 @@
 
         </div>
     </section>
+<!-- ══ FOOTER ══ -->
+<footer class="py-12 border-t border-zinc-900 text-center bg-black">
+    <p class="text-zinc-500 text-sm">© 2026 Naga Flix Cambodia. Proudly supporting local cinema.</p>
+</footer>
 
-    <!-- FOOTER -->
-    <footer class="py-12 border-t border-zinc-900 text-center bg-black">
-        <p class="text-zinc-500 text-sm">© 2026 Naga Flix Cambodia. Proudly supporting local cinema.</p>
-    </footer>
+<!-- ══ AUTH MODAL ══ -->
+<div id="auth-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-[150] flex items-center justify-center p-4">
+    <div class="bg-zinc-900 border border-zinc-800 w-full max-w-md rounded-3xl p-8 relative">
+        <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-zinc-500 hover:text-white text-3xl">×</button>
+        <div id="signin-form-container"><h2 class="text-2xl font-bold text-center gold-gradient mb-8">Sign In</h2><form onsubmit="handleAuthAction(event)" class="space-y-4"><input type="email" placeholder="Email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none"><input type="password" placeholder="Password" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none"><button type="submit" class="w-full bg-amber-400 text-black font-bold py-4 rounded-xl hover:bg-amber-300 transition-all">Sign In</button></form><p class="text-zinc-500 text-center mt-6 text-sm">New to Naga Flix? <button onclick="toggleAuthMode('signup')" class="text-amber-400 hover:underline">Sign up now</button></p></div>
+        <div id="signup-form-container" class="hidden"><h2 class="text-2xl font-bold text-center gold-gradient mb-8">Create Account</h2><form onsubmit="handleAuthAction(event)" class="space-y-4"><input type="text" placeholder="Full Name" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none"><input type="email" placeholder="Email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none"><input type="password" placeholder="Password" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none"><button type="submit" class="w-full bg-amber-400 text-black font-bold py-4 rounded-xl hover:bg-amber-300 transition-all">Create Account</button></form><p class="text-zinc-500 text-center mt-6 text-sm">Already have an account? <button onclick="toggleAuthMode('signin')" class="text-amber-400 hover:underline">Sign in</button></p></div>
+    </div>
+</div>
 
-    <!-- VIDEO MODAL -->
-    <div id="video-modal" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center">
-        <div class="max-w-5xl w-full mx-4 relative">
-            <button onclick="closeModal()" class="absolute -top-12 right-0 text-white text-4xl hover:text-amber-400">×</button>
-            <div class="aspect-video bg-black rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl">
-                <iframe id="video-frame" class="w-full h-full" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<!-- ═══════════════════════════════════════════════
+     ★★★  UNIFIED DETAIL PAGE  ★★★
+     Works for: Trailers · Full Movies · Pro Movies · Pro Trailers
+═══════════════════════════════════════════════ -->
+<div id="detail-page">
+
+    <!-- sticky top bar -->
+    <div id="detail-topbar" class="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10 flex items-center gap-4 px-4 md:px-8 py-3">
+        <button class="back-btn" onclick="closeDetail()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+        <span id="detail-nav-title" class="text-white font-bold text-sm opacity-60 truncate flex-1"></span>
+        <div id="detail-nav-badges" class="flex gap-2 shrink-0"></div>
+    </div>
+
+    <!-- ── TRAILER layout: full-width video ── -->
+    <div id="detail-trailer-layout">
+        <div class="detail-video-wrap"><iframe id="detail-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="detail-gradient-bottom"></div>
+    </div>
+
+    <!-- ── MOVIE layout: banner + poster card ── -->
+    <div id="detail-movie-layout" class="hidden">
+        <div id="detail-banner" class="movie-banner">
+            <div class="movie-banner-overlay"></div>
+        </div>
+        <!-- poster + primary info row -->
+        <div class="max-w-screen-2xl mx-auto px-4 md:px-8 -mt-32 relative z-10 flex gap-6 items-end mb-8">
+            <img id="detail-poster" src="" class="hidden md:block w-40 rounded-2xl border-2 border-zinc-800 shadow-2xl flex-shrink-0 object-cover" style="aspect-ratio:2/3">
+            <div class="flex-1 pb-2">
+                <div id="detail-movie-badges" class="flex flex-wrap gap-2 mb-3"></div>
+                <h1 id="detail-movie-title-kh" class="text-3xl md:text-5xl font-bold mb-1" style='font-family:"Fasthand",cursive'></h1>
+                <h2 id="detail-movie-title-en" class="text-lg text-zinc-400 font-medium"></h2>
             </div>
         </div>
     </div>
 
-    <!-- AUTH MODAL (ENHANCED) -->
-    <div id="auth-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-        <div class="bg-zinc-900 border border-zinc-800 w-full max-w-md rounded-3xl p-8 relative">
-            <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-zinc-500 hover:text-white text-3xl">×</button>
-            
-            <div id="signin-form-container">
-                <h2 class="text-2xl font-bold text-center gold-gradient mb-8">Sign In</h2>
-                <form onsubmit="handleAuthAction(event)" class="space-y-4">
-                    <input type="email" placeholder="Email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
-                    <input type="password" placeholder="Password" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
-                    <button type="submit" class="w-full bg-amber-400 text-black font-bold py-4 rounded-xl hover:bg-amber-300 transition-all">Sign In</button>
-                </form>
-                <p class="text-zinc-500 text-center mt-6 text-sm">
-                    New to Naga Flix? <button onclick="toggleAuthMode('signup')" class="text-amber-400 hover:underline">Sign up now</button>
-                </p>
-            </div>
+    <!-- ── SHARED BODY ── -->
+    <div class="detail-body">
 
-            <div id="signup-form-container" class="hidden">
-                <h2 class="text-2xl font-bold text-center gold-gradient mb-8">Create Account</h2>
-                <form onsubmit="handleAuthAction(event)" class="space-y-4">
-                    <input type="text" placeholder="Full Name" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
-                    <input type="email" placeholder="Email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
-                    <input type="password" placeholder="Password" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 outline-none">
-                    <button type="submit" class="w-full bg-amber-400 text-black font-bold py-4 rounded-xl hover:bg-amber-300 transition-all">Create Account</button>
-                </form>
-                <p class="text-zinc-500 text-center mt-6 text-sm">
-                    Already have an account? <button onclick="toggleAuthMode('signin')" class="text-amber-400 hover:underline">Sign in</button>
-                </p>
+        <!-- trailer title block (only shown in trailer mode) -->
+        <div id="detail-trailer-header" class="mb-6">
+            <div id="detail-trailer-badges" class="flex flex-wrap gap-2 mb-3"></div>
+            <h1 id="detail-title-kh" class="text-3xl md:text-5xl font-bold mb-1" style='font-family:"Fasthand",cursive'></h1>
+            <h2 id="detail-title-en" class="text-lg text-zinc-400 font-medium mb-4"></h2>
+            <p id="detail-desc" class="text-zinc-300 max-w-2xl leading-relaxed text-sm md:text-base"></p>
+        </div>
+
+        <!-- movie description (only shown in movie mode) -->
+        <p id="detail-movie-desc" class="text-zinc-300 leading-relaxed text-sm md:text-base mb-6 hidden max-w-2xl"></p>
+
+        <!-- info grid (year, runtime, rating, language) - movie only -->
+        <div id="detail-info-grid" class="info-grid mb-8 hidden">
+            <div class="info-cell"><div class="label">Year</div><div class="val" id="ig-year">—</div></div>
+            <div class="info-cell"><div class="label">Runtime</div><div class="val" id="ig-runtime">—</div></div>
+            <div class="info-cell"><div class="label">Language</div><div class="val" id="ig-lang">Khmer</div></div>
+            <div class="info-cell"><div class="label">Rating</div><div class="val" id="ig-rating">—</div></div>
+        </div>
+
+        <!-- primary action row -->
+        <div class="flex flex-wrap items-center gap-3 mb-8 pb-8 border-b border-zinc-800">
+            <!-- watch / play button (movie mode) -->
+            <button id="detail-watch-btn" class="watch-btn hidden" onclick="playMovieVideo()">
+                <i class="fa-solid fa-play"></i> Watch Now
+            </button>
+            <!-- watchlist (movie mode) -->
+            <button id="detail-watchlist-btn" class="watchlist-btn hidden" onclick="toggleWatchlist()">
+                <i class="fa-solid fa-plus" id="wl-icon"></i> <span id="wl-label">Watchlist</span>
+            </button>
+            <!-- like (all) -->
+            <button id="detail-like-btn" class="like-btn" onclick="toggleLike()">
+                <i class="fa-solid fa-heart"></i>
+                <span id="detail-like-count">0</span>
+            </button>
+            <!-- share -->
+            <button class="action-btn" onclick="handleShare()"><i class="fa-solid fa-share-nodes"></i> Share</button>
+            <!-- views -->
+            <div class="ml-auto flex items-center gap-2 text-zinc-500 text-sm">
+                <i class="fa-solid fa-eye"></i> <span id="detail-views">0</span> views
             </div>
         </div>
+
+        <!-- cast row (movie only) -->
+        <div id="detail-cast-section" class="hidden mb-10">
+            <h3 class="text-base font-bold text-white mb-4">Cast & Crew</h3>
+            <div id="detail-cast" class="flex gap-5 overflow-x-auto horizontal-scroll pb-2"></div>
+        </div>
+
+        <!-- ★ TABS (Overview / Rating / Comments) ── -->
+        <div class="flex gap-2 mb-8 flex-wrap">
+            <button class="tab-btn active" id="tab-rating-btn" onclick="switchTab('rating')">⭐ Rate</button>
+            <button class="tab-btn" id="tab-comments-btn" onclick="switchTab('comments')">💬 Comments</button>
+        </div>
+
+        <!-- RATING TAB -->
+        <div id="tab-rating" class="mb-10">
+            <h3 class="text-lg font-bold text-white mb-5">Rate this</h3>
+            <div class="flex flex-col md:flex-row md:items-start gap-8">
+                <div>
+                    <p class="text-zinc-500 text-sm mb-2">Your rating</p>
+                    <div class="star-row" id="user-stars">
+                        <span class="star" onclick="setRating(1)" onmouseover="hoverStar(1)" onmouseout="resetHover()">★</span>
+                        <span class="star" onclick="setRating(2)" onmouseover="hoverStar(2)" onmouseout="resetHover()">★</span>
+                        <span class="star" onclick="setRating(3)" onmouseover="hoverStar(3)" onmouseout="resetHover()">★</span>
+                        <span class="star" onclick="setRating(4)" onmouseover="hoverStar(4)" onmouseout="resetHover()">★</span>
+                        <span class="star" onclick="setRating(5)" onmouseover="hoverStar(5)" onmouseout="resetHover()">★</span>
+                    </div>
+                    <p id="rating-label" class="text-zinc-500 text-xs mt-2">Tap a star to rate</p>
+                </div>
+                <div class="flex-1 max-w-xs">
+                    <p class="text-zinc-500 text-sm mb-1">Community average</p>
+                    <div class="flex items-baseline gap-2 mb-2">
+                        <span id="avg-score" class="text-3xl font-bold text-amber-400">4.2</span>
+                        <span class="text-zinc-500 text-sm">/ 5</span>
+                        <span id="rating-count" class="text-zinc-600 text-xs ml-1">(128 ratings)</span>
+                    </div>
+                    <div class="avg-bar"><div id="avg-fill" class="avg-fill" style="width:84%"></div></div>
+                </div>
+                <div class="flex flex-col gap-1.5 text-xs text-zinc-500 min-w-[140px]">
+                    <div class="flex items-center gap-2"><span class="w-4 shrink-0">5★</span><div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:60%"></div></div><span>60%</span></div>
+                    <div class="flex items-center gap-2"><span class="w-4 shrink-0">4★</span><div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:25%"></div></div><span>25%</span></div>
+                    <div class="flex items-center gap-2"><span class="w-4 shrink-0">3★</span><div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:10%"></div></div><span>10%</span></div>
+                    <div class="flex items-center gap-2"><span class="w-4 shrink-0">2★</span><div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:3%"></div></div><span>3%</span></div>
+                    <div class="flex items-center gap-2"><span class="w-4 shrink-0">1★</span><div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:2%"></div></div><span>2%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMENTS TAB -->
+        <div id="tab-comments" class="hidden">
+            <h3 class="text-lg font-bold text-white mb-5 flex items-center gap-2">
+                <i class="fa-regular fa-comment text-amber-400"></i> Comments <span id="comment-count-badge" class="text-zinc-500 font-normal text-sm"></span>
+            </h3>
+            <div class="flex gap-3 mb-8">
+                <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#facc15,#f59e0b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#000;flex-shrink:0">ME</div>
+                <div class="flex-1">
+                    <textarea id="new-comment-text" class="comment-input" rows="2" placeholder="Share your thoughts..."></textarea>
+                    <div class="flex justify-end mt-2">
+                        <button onclick="submitComment()" class="bg-amber-400 hover:bg-amber-300 text-black font-bold px-5 py-2 rounded-xl text-sm transition-all active:scale-95">Post</button>
+                    </div>
+                </div>
+            </div>
+            <div id="comments-list" class="flex flex-col gap-4"></div>
+        </div>
+
+        <!-- MORE like this -->
+        <div class="mt-16 pt-10 border-t border-zinc-800">
+            <h3 class="text-xl font-bold text-white mb-6" id="more-section-title">More like this</h3>
+            <div id="more-items" class="flex gap-4 overflow-x-auto horizontal-scroll pb-4"></div>
+        </div>
     </div>
+</div>
 
-    <script>
-        const trailerData = [
-            { title: "The Peacekeeper", kh: "សត្រូវព្រាយ", img: "https://scontent.fpnh18-1.fna.fbcdn.net/v/t39.30808-6/694973536_977506471687129_8989255514275114639_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEJttkVYyQ-BmXq22Iz-FUspdp8RI1UGrGl2nxEjVQasZqoxNIHwVuoQJ6UFCSaigpbJyUssdZHSuwOVLtw9Gk-&_nc_ohc=deZZLvj1kK4Q7kNvwHc2rWS&_nc_oc=Adp-9UtJWrjzu1Xfjs_Q3JYmxLMYsKn8eYShYn3YXAgFuGYBpehZpMsqz96wwakFbgM&_nc_zt=23&_nc_ht=scontent.fpnh18-1.fna&_nc_gid=bPaKeQL__PtYOJTVXhIXrA&_nc_ss=7b2a8&oh=00_Af71EKdJEBFBqnlMaWAfqRCh-t7LzFtWboSXEtJPw9b4tg&oe=6A0B8F48", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Far Away, Close to You", kh: "ឆ្ងាយតែជិត", img: "https://picsum.photos/id/201/400/600", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "The Enemy of Demon", kh: "សត្រូវបិសាច", img: "https://picsum.photos/id/251/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Lost in the Jungle", kh: "វង្វេងក្នុងព្រៃ", img: "https://picsum.photos/id/301/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "The Golden Land", kh: "ទឹកដីមាស", img: "https://picsum.photos/id/351/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Silent Echoes", kh: "សម្លេងស្ងាត់", img: "https://picsum.photos/id/401/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" }
-        ];
+<!-- video overlay for movie watch -->
+<div id="movie-video-overlay" class="hidden fixed inset-0 bg-black/95 z-[300] flex items-center justify-center">
+    <div class="max-w-5xl w-full mx-4 relative">
+        <button onclick="closeMovieVideo()" class="absolute -top-12 right-0 text-white text-4xl hover:text-amber-400">×</button>
+        <div class="aspect-video bg-black rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl">
+            <iframe id="movie-video-frame" class="w-full h-full" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
 
-        const movieData = [
-            { title: "Jailbreak", kh: "ការបំបែកគុក", img: "https://picsum.photos/id/10/400/600", year: "2017", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "First They Killed My Father", kh: "មុនដំបូងខ្មែរក្រហមសម្លាប់ប៉ារបស់ខ្ញុំ", img: "https://picsum.photos/id/20/400/600", year: "2017", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "The Last Reel", kh: "ដុំហ្វីលចុងក្រោយ", img: "https://picsum.photos/id/30/400/600", year: "2014", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "In the Life of Music", kh: "ក្នុងជីវិតតន្ត្រី", img: "https://picsum.photos/id/40/400/600", year: "2018", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "Fathers", kh: "លោកឪពុក", img: "https://picsum.photos/id/50/400/600", year: "2020", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Ruin", kh: "ការបំផ្លាញ", img: "https://picsum.photos/id/60/400/600", year: "2013", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "The Missing Picture", kh: "រូបភាពដែលបាត់បង់", img: "https://picsum.photos/id/70/400/600", year: "2013", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "A River Changes Course", kh: "ទន្លេប្តូរទិស", img: "https://picsum.photos/id/80/400/600", year: "2013", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "Golden Slumbers", kh: "ដំណេកមាស", img: "https://picsum.photos/id/90/400/600", year: "2011", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Same Same But Different", kh: "ដូចគ្នាខ្លះខុសគ្នាខ្លះ", img: "https://picsum.photos/id/100/400/600", year: "2009", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "The Gate", kh: "ខ្លោងទ្វារ", img: "https://picsum.photos/id/110/400/600", year: "2014", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Angkor Awakens", kh: "អង្គរភ្ញាក់ឡើង", img: "https://picsum.photos/id/120/400/600", year: "2017", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "Small White Shells", kh: "សំបកខ្យងតូចៗ", img: "https://picsum.photos/id/130/400/600", year: "2021", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "White Building", kh: "អគារស", img: "https://picsum.photos/id/140/400/600", year: "2021", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "Everything Will Be OK", kh: "គ្រប់យ៉ាងនឹងប្រសើរឡើង", img: "https://picsum.photos/id/150/400/600", year: "2022", url: "https://www.youtube.com/embed/00rW1_twWhI" }
-        ];
+<div id="toast"></div>
 
-        const proMovieData = [
-            { title: "Kingdom of Wonders", kh: "ព្រះរាជាណាចក្រអច្ឆរិយៈ", img: "https://picsum.photos/id/160/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Shadows of Angkor", kh: "ស្រមោលអង្គរ", img: "https://picsum.photos/id/170/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "The Last Guardian", kh: "អ្នកការពារចុងក្រោយ", img: "https://picsum.photos/id/180/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Mekong Rhythms", kh: "ចង្វាក់មេគង្គ", img: "https://picsum.photos/id/190/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "Silver Pagoda Secrets", kh: "អាថ៌កំបាំងព្រះវិហារប្រាក់", img: "https://picsum.photos/id/200/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Phnom Penh Nights", kh: "រាត្រីភ្នំពេញ", img: "https://picsum.photos/id/210/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "Ancient Echoes", kh: "សម្លេងបុរាណ", img: "https://picsum.photos/id/220/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "The Silk Weaver", kh: "អ្នកត្បាញសូត្រ", img: "https://picsum.photos/id/230/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "Bokator Spirit", kh: "វិញ្ញាណល្បុក្កតោ", img: "https://picsum.photos/id/240/400/600", year: "2024", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Tonle Sap Tales", kh: "រឿងរ៉ាវបឹងទន្លេសាប", img: "https://picsum.photos/id/250/400/600", year: "2024", url: "https://www.youtube.com/embed/ePCjZ89Us-c" }
-        ];
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════ -->
+<script>
+// ─── DATA ───
+const trailerData = [
+    { id:"t0", type:"trailer", title:"The Peacekeeper", kh:"សត្រូវព្រាយ", img:"https://scontent.fpnh18-1.fna.fbcdn.net/v/t39.30808-6/694973536_977506471687129_8989255514275114639_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEJttkVYyQ-BmXq22Iz-FUspdp8RI1UGrGl2nxEjVQasZqoxNIHwVuoQJ6UFCSaigpbJyUssdZHSuwOVLtw9Gk-&_nc_ohc=deZZLvj1kK4Q7kNvwHc2rWS&_nc_oc=Adp-9UtJWrjzu1Xfjs_Q3JYmxLMYsKn8eYShYn3YXAgFuGYBpehZpMsqz96wwakFbgM&_nc_zt=23&_nc_ht=scontent.fpnh18-1.fna&_nc_gid=bPaKeQL__PtYOJTVXhIXrA&_nc_ss=7b2a8&oh=00_Af71EKdJEBFBqnlMaWAfqRCh-t7LzFtWboSXEtJPw9b4tg&oe=6A0B8F48", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"Experience the legendary tale of Cambodia's last guardian in this epic 4K adventure.", views:34200, likes:1820, genres:["Drama","Action","Khmer"] },
+    { id:"t1", type:"trailer", title:"Far Away, Close to You", kh:"ឆ្ងាយតែជិត", img:"https://picsum.photos/id/201/400/600", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"A heartfelt romantic journey across the Cambodian countryside.", views:18400, likes:940, genres:["Romance","Drama"] },
+    { id:"t2", type:"trailer", title:"The Enemy of Demon", kh:"សត្រូវបិសាច", img:"https://picsum.photos/id/251/400/600", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A supernatural thriller that pushes the boundaries of Khmer horror.", views:22100, likes:1130, genres:["Horror","Thriller"] },
+    { id:"t3", type:"trailer", title:"Lost in the Jungle", kh:"វង្វេងក្នុងព្រៃ", img:"https://picsum.photos/id/301/400/600", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A survival story set deep in Cambodia's ancient rainforests.", views:9800, likes:510, genres:["Adventure","Survival"] },
+    { id:"t4", type:"trailer", title:"The Golden Land", kh:"ទឹកដីមាស", img:"https://picsum.photos/id/351/400/600", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A sweeping historical epic celebrating Khmer civilisation.", views:15600, likes:780, genres:["History","Epic"] },
+    { id:"t5", type:"trailer", title:"Silent Echoes", kh:"សម្លេងស្ងាត់", img:"https://picsum.photos/id/401/400/600", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A haunting drama of memory and silence in post-war Cambodia.", views:11200, likes:620, genres:["Drama"] }
+];
 
-        const proTrailerData = [
-            { title: "The Dragon's Breath", kh: "ដង្ហើមនាគ", img: "https://picsum.photos/id/260/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "Spirit of the Forest", kh: "វិញ្ញាណព្រៃភ្នំ", img: "https://picsum.photos/id/270/400/600", url: "https://www.youtube.com/embed/ePCjZ89Us-c" },
-            { title: "Echoes of History", kh: "សម្លេងប្រវត្តិសាស្ត្រ", img: "https://picsum.photos/id/280/400/600", url: "https://www.youtube.com/embed/00rW1_twWhI" },
-            { title: "The Royal Quest", kh: "បេសកកម្មព្រះរាជា", img: "https://picsum.photos/id/290/400/600", url: "https://www.youtube.com/embed/ePCjZ89Us-c" }
-        ];
+const movieData = [
+    { id:"m0", type:"movie", title:"Jailbreak", kh:"ការបំបែកគុក", img:"https://picsum.photos/id/10/400/600", year:"2017", runtime:"1h 30m", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A gripping action thriller set inside a Cambodian prison where officers fight to survive.", views:52000, likes:3100, genres:["Action","Thriller"], cast:["Dara S.","Maly K.","Rith P.","Bopha C."] },
+    { id:"m1", type:"movie", title:"First They Killed My Father", kh:"មុនដំបូងខ្មែរក្រហមសម្លាប់ប៉ារបស់ខ្ញុំ", img:"https://picsum.photos/id/20/400/600", year:"2017", runtime:"2h 16m", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"A powerful true story of survival set during the Khmer Rouge era.", views:89000, likes:5400, genres:["Drama","History","War"], cast:["Sareum S.","Phoeung K.","Sveng H."] },
+    { id:"m2", type:"movie", title:"The Last Reel", kh:"ដុំហ្វីលចុងក្រោយ", img:"https://picsum.photos/id/30/400/600", year:"2014", runtime:"1h 40m", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A young woman discovers her actress mother's final, unfinished film.", views:31000, likes:1800, genres:["Drama","Romance"], cast:["Ros S.","Dy S.","Chhith S."] },
+    { id:"m3", type:"movie", title:"In the Life of Music", kh:"ក្នុងជីវិតតន្ត្រី", img:"https://picsum.photos/id/40/400/600", year:"2018", runtime:"1h 52m", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"Three generations united by one iconic Cambodian song.", views:28000, likes:1540, genres:["Music","Drama"], cast:["Tuy S.","Chumvan S.","Long P."] },
+    { id:"m4", type:"movie", title:"Fathers", kh:"លោកឪពុក", img:"https://picsum.photos/id/50/400/600", year:"2020", runtime:"1h 44m", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A touching story exploring fatherhood across different Cambodian families.", views:19000, likes:1020, genres:["Drama","Family"], cast:["Kolab P.","Vannak C.","Sreymom L."] },
+    { id:"m5", type:"movie", title:"Ruin", kh:"ការបំផ្លាញ", img:"https://picsum.photos/id/60/400/600", year:"2013", runtime:"1h 10m", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"A female Khmer Rouge soldier searches for redemption after the war.", views:15000, likes:870, genres:["Drama","War"], cast:["Dy K.","Ros B."] },
+    { id:"m6", type:"movie", title:"The Missing Picture", kh:"រូបភាពដែលបាត់បង់", img:"https://picsum.photos/id/70/400/600", year:"2013", runtime:"1h 32m", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A filmmaker searches for images missing from official archives of the Khmer Rouge.", views:21000, likes:1100, genres:["Documentary","History"], cast:["Rithy P."] },
+    { id:"m7", type:"movie", title:"A River Changes Course", kh:"ទន្លេប្តូរទិស", img:"https://picsum.photos/id/80/400/600", year:"2013", runtime:"1h 23m", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"Three rural families face Cambodia's rapid modernisation.", views:12000, likes:640, genres:["Documentary"], cast:["Khieu M.","Kong S.","Sav S."] },
+    { id:"m8", type:"movie", title:"Golden Slumbers", kh:"ដំណេកមាស", img:"https://picsum.photos/id/90/400/600", year:"2011", runtime:"1h 38m", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A tribute to the golden age of Cambodian cinema lost to the Khmer Rouge.", views:17000, likes:910, genres:["Documentary","Music"], cast:["Dy S.","Ros S.","Pan R."] },
+    { id:"m9", type:"movie", title:"Same Same But Different", kh:"ដូចគ្នាខ្លះខុសគ្នាខ្លះ", img:"https://picsum.photos/id/100/400/600", year:"2009", runtime:"1h 35m", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"A German tourist falls in love with a Cambodian woman, only to discover she is HIV-positive.", views:25000, likes:1350, genres:["Romance","Drama"], cast:["David K.","Srey N."] }
+];
 
-        function populateContent() {
-            const trailerRow = document.getElementById('trending-row');
-            trailerData.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "movie-card min-w-[200px] md:min-w-[280px] cursor-pointer group";
-                card.innerHTML = `
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
-                        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <i class="fa-solid fa-circle-play text-5xl text-amber-400"></i>
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4">
-                            <div class="text-sm font-bold">${item.kh}</div>
-                            <div class="text-amber-400 text-xs">${item.title}</div>
-                        </div>
-                    </div>`;
-                card.onclick = () => openVideo(item.url);
-                trailerRow.appendChild(card);
-            });
+const proMovieData = [
+    { id:"pm0", type:"pro-movie", title:"Kingdom of Wonders", kh:"ព្រះរាជាណាចក្រអច្ឆរិយៈ", img:"https://picsum.photos/id/160/400/600", year:"2024", runtime:"2h 5m", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"An epic fantasy set in a mythical Khmer kingdom, battling ancient forces for survival.", views:61000, likes:4200, genres:["Fantasy","Epic","Khmer"], cast:["Ratanak P.","Sreymom V.","Dara K.","Bopha L.","Chan R."] },
+    { id:"pm1", type:"pro-movie", title:"Shadows of Angkor", kh:"ស្រមោលអង្គរ", img:"https://picsum.photos/id/170/400/600", year:"2024", runtime:"1h 58m", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"A detective thriller set amidst the ancient temples of Angkor Wat.", views:44000, likes:2900, genres:["Thriller","Mystery"], cast:["Vannak T.","Maly S.","Rith C."] },
+    { id:"pm2", type:"pro-movie", title:"The Last Guardian", kh:"អ្នកការពារចុងក្រោយ", img:"https://picsum.photos/id/180/400/600", year:"2024", runtime:"2h 12m", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"The final warrior of a dying order stands between Cambodia and darkness.", views:38000, likes:2400, genres:["Action","Fantasy"], cast:["Kosal H.","Champa K.","Vuth P."] },
+    { id:"pm3", type:"pro-movie", title:"Mekong Rhythms", kh:"ចង្វាក់មេគង្គ", img:"https://picsum.photos/id/190/400/600", year:"2024", runtime:"1h 46m", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"A jazz musician travels the Mekong discovering forgotten melodies.", views:22000, likes:1300, genres:["Music","Drama"], cast:["Lim S.","Nary P."] },
+    { id:"pm4", type:"pro-movie", title:"Silver Pagoda Secrets", kh:"អាថ៌កំបាំងព្រះវិហារប្រាក់", img:"https://picsum.photos/id/200/400/600", year:"2024", runtime:"1h 54m", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A royal secret buried inside Phnom Penh's Silver Pagoda resurfaces after 50 years.", views:31000, likes:1900, genres:["Mystery","Drama"], cast:["Sothy R.","Chenda L.","Prak V."] }
+];
 
-            const movieRow = document.getElementById('movies-row');
-            movieData.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "movie-card cursor-pointer group";
-                card.innerHTML = `
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
-                        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <i class="fa-solid fa-play text-4xl text-white"></i>
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4">
-                            <div class="text-sm font-bold truncate">${item.kh}</div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-amber-400 text-xs">${item.title}</span>
-                                <span class="text-zinc-500 text-[10px]">${item.year}</span>
-                            </div>
-                        </div>
-                    </div>`;
-                card.onclick = () => openVideo(item.url);
-                movieRow.appendChild(card);
-            });
+const proTrailerData = [
+    { id:"pt0", type:"pro-trailer", title:"The Dragon's Breath", kh:"ដង្ហើមនាគ", img:"https://picsum.photos/id/260/400/600", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"Naga mythology comes alive in this visually stunning teaser.", views:19000, likes:1100, genres:["Fantasy","Action"] },
+    { id:"pt1", type:"pro-trailer", title:"Spirit of the Forest", kh:"វិញ្ញាណព្រៃភ្នំ", img:"https://picsum.photos/id/270/400/600", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"Ancient spirits awaken in the heart of the Cambodian rainforest.", views:14000, likes:820, genres:["Horror","Fantasy"] },
+    { id:"pt2", type:"pro-trailer", title:"Echoes of History", kh:"សម្លេងប្រវត្តិសាស្ត្រ", img:"https://picsum.photos/id/280/400/600", url:"https://www.youtube.com/embed/00rW1_twWhI", desc:"A docudrama revisiting pivotal moments in Khmer civilisation.", views:11000, likes:590, genres:["History","Drama"] },
+    { id:"pt3", type:"pro-trailer", title:"The Royal Quest", kh:"បេសកកម្មព្រះរាជា", img:"https://picsum.photos/id/290/400/600", url:"https://www.youtube.com/embed/ePCjZ89Us-c", desc:"A prince embarks on a perilous quest to reclaim his stolen throne.", views:16000, likes:950, genres:["Adventure","Action"] }
+];
 
-            const proMovieRow = document.getElementById('pro-movies-row');
-            proMovieData.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "movie-card cursor-pointer group";
-                card.innerHTML = `
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
-                        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
-                        <div class="absolute top-3 left-3 bg-amber-400 text-black px-2 py-0.5 rounded text-[10px] font-bold">
-                            PRO
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <i class="fa-solid fa-crown text-4xl text-amber-400"></i>
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-amber-400/20 via-black/80 to-transparent p-4">
-                            <div class="text-sm font-bold truncate">${item.kh}</div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-amber-400 text-xs">${item.title}</span>
-                                <span class="text-zinc-500 text-[10px]">${item.year}</span>
-                            </div>
-                        </div>
-                    </div>`;
-                card.onclick = () => openVideo(item.url);
-                proMovieRow.appendChild(card);
-            });
+const ALL_ITEMS = [...trailerData, ...movieData, ...proMovieData, ...proTrailerData];
 
-            const proTrailerRow = document.getElementById('pro-trailers-row');
-            proTrailerData.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "movie-card min-w-[200px] md:min-w-[280px] cursor-pointer group";
-                card.innerHTML = `
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
-                        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
-                        <div class="absolute top-3 left-3 bg-amber-400 text-black px-2 py-0.5 rounded text-[10px] font-bold">
-                            PRO SNEAK
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <i class="fa-solid fa-circle-play text-5xl text-amber-400"></i>
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-amber-400/20 via-black/80 to-transparent p-4">
-                            <div class="text-sm font-bold">${item.kh}</div>
-                            <div class="text-amber-400 text-xs">${item.title}</div>
-                        </div>
-                    </div>`;
-                card.onclick = () => openVideo(item.url);
-                proTrailerRow.appendChild(card);
-            });
-        }
-
-        function openVideo(url) {
-            document.getElementById('video-frame').src = url + "?autoplay=1";
-            document.getElementById('video-modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('video-modal').classList.add('hidden');
-            document.getElementById('video-frame').src = "";
-        }
-
-        function openAuthModal(mode) {
-            document.getElementById('auth-modal').classList.remove('hidden');
-            toggleAuthMode(mode === 'signin' ? 'signin' : 'signup');
-        }
-
-        function closeAuthModal() {
-            document.getElementById('auth-modal').classList.add('hidden');
-        }
-
-        function toggleAuthMode(mode) {
-            if (mode === 'signin') {
-                document.getElementById('signin-form-container').classList.remove('hidden');
-                document.getElementById('signup-form-container').classList.add('hidden');
-            } else {
-                document.getElementById('signin-form-container').classList.add('hidden');
-                document.getElementById('signup-form-container').classList.remove('hidden');
-            }
-        }
-
-        function handleAuthAction(e) {
-            e.preventDefault();
-            // Simulate successful login/signup
-            document.getElementById('nav-signin-btn').classList.add('hidden');
-            document.getElementById('nav-profile-ui').classList.remove('hidden');
-            closeAuthModal();
-        }
-
-        function handleLogout() {
-            document.getElementById('nav-signin-btn').classList.remove('hidden');
-            document.getElementById('nav-profile-ui').classList.add('hidden');
-            document.getElementById('profile-dropdown').classList.add('hidden');
-        }
-
-        function toggleProfileDropdown() {
-            document.getElementById('profile-dropdown').classList.toggle('hidden');
-        }
-
-        function handleSearch(query) {
-            const searchTerm = query.toLowerCase();
-            const allCards = document.querySelectorAll('.movie-card');
-            
-            allCards.forEach(card => {
-                const title = card.innerText.toLowerCase();
-                if (title.includes(searchTerm)) {
-                    card.style.display = "";
-                    card.style.opacity = "1";
-                    card.style.transform = "scale(1)";
-                } else {
-                    card.style.display = "none";
-                    card.style.opacity = "0";
-                    card.style.transform = "scale(0.95)";
-                }
-            });
-
-            // Smoothly scroll to content if searching and not already there
-            if (searchTerm.length > 0 && window.scrollY < 300) {
-                window.scrollTo({ top: 400, behavior: 'smooth' });
-            }
-        }
-
-        let currentHeroIndex = 0;
-        let heroInterval;
-
-        function startHeroAutoCycle() {
-            if (heroInterval) clearInterval(heroInterval);
-            heroInterval = setInterval(() => {
-                reloadHero(true);
-            }, 8000); // Cycles every 8 seconds
-        }
-
-        function reloadHero(isAuto = false) {
-            currentHeroIndex = (currentHeroIndex + 1) % trailerData.length;
-            const movie = trailerData[currentHeroIndex];
-            
-            const heroBg = document.getElementById('hero-bg');
-            const heroTitle = document.getElementById('hero-title');
-            const heroDesc = document.getElementById('hero-desc');
-            const heroPlayBtn = document.getElementById('hero-play-btn');
-
-            // Fade out effect
-            heroBg.style.opacity = "0.5";
-            
-            setTimeout(() => {
-                heroBg.style.backgroundImage = `url('${movie.img}')`;
-                heroTitle.innerText = movie.kh;
-                heroDesc.innerText = `Discover "${movie.title}" - a cinematic journey exclusively on NagaFlix. Experience the best of Khmer entertainment.`;
-                heroPlayBtn.onclick = () => openVideo(movie.url);
-                
-                // Fade in effect
-                heroBg.style.opacity = "1";
-            }, 300);
-
-            // If manual click, reset the auto-cycle timer
-            if (!isAuto) {
-                startHeroAutoCycle();
-            }
-        }
-
-        function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('theme-icon');
-            
-            if (body.classList.contains('light-theme')) {
-                body.classList.remove('light-theme');
-                body.classList.add('dark-theme');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.classList.remove('dark-theme');
-                body.classList.add('light-theme');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Initialize theme with automatic detection
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const body = document.body;
-            const icon = document.getElementById('theme-icon');
-            
-            let themeToApply = 'dark'; // Default
-
-            if (savedTheme) {
-                themeToApply = savedTheme;
-            } else {
-                // 1. Check system preference
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                // 2. Check time of day (6 PM to 6 AM is dark)
-                const hour = new Date().getHours();
-                const isNight = hour >= 18 || hour < 6;
-
-                if (prefersDark || isNight) {
-                    themeToApply = 'dark';
-                } else {
-                    themeToApply = 'light';
-                }
-            }
-            
-            body.classList.remove('light-theme', 'dark-theme');
-            body.classList.add(themeToApply + '-theme');
-            
-            if (themeToApply === 'light') {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
-            } else {
-                menu.classList.add('hidden');
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            }
-        }
-
-        window.onload = () => {
-            initTheme();
-            populateContent();
-            startHeroAutoCycle();
+// ─── PER-ITEM STATE ───
+const itemState = {};
+function getState(id) {
+    if (!itemState[id]) {
+        itemState[id] = {
+            liked:false, inWatchlist:false, userRating:0,
+            comments:[
+                {name:"Ratanak K.",initials:"RK",text:"ខ្ញុំចូលចិត្តខ្លាំងណាស់! 🔥 The cinematography is stunning.",ts:"2h ago",likes:14,liked:false},
+                {name:"Sreymom P.",initials:"SP",text:"Can't wait for the full release. The trailer already gave me chills!",ts:"5h ago",likes:27,liked:false},
+                {name:"Dara V.",initials:"DV",text:"Best Khmer content of 2026 for sure. 🇰🇭",ts:"1d ago",likes:9,liked:false}
+            ]
         };
-    </script>
+    }
+    return itemState[id];
+}
+
+let currentItem = null;
+let currentMovieUrl = '';
+let currentTab = 'rating';
+
+// ─── OPEN DETAIL ───
+function openDetail(item) {
+    currentItem = item;
+    const state = getState(item.id);
+    const isMovie = item.type === 'movie' || item.type === 'pro-movie';
+    const isTrailer = item.type === 'trailer' || item.type === 'pro-trailer';
+    const isPro = item.type === 'pro-movie' || item.type === 'pro-trailer';
+
+    // toggle layouts
+    show('detail-trailer-layout', isTrailer);
+    show('detail-movie-layout', isMovie);
+    show('detail-trailer-header', isTrailer);
+    show('detail-movie-desc', isMovie);
+    show('detail-info-grid', isMovie);
+    show('detail-cast-section', isMovie);
+    show('detail-watch-btn', isMovie);
+    show('detail-watchlist-btn', isMovie);
+
+    // top bar
+    document.getElementById('detail-nav-title').textContent = item.kh + ' — ' + item.title;
+    const navBadges = document.getElementById('detail-nav-badges');
+    navBadges.innerHTML = isPro ? '<span class="pro-pill">PRO</span>' : '';
+
+    if (isTrailer) {
+        document.getElementById('detail-iframe').src = item.url + '?autoplay=1';
+        // trailer header
+        const tb = document.getElementById('detail-trailer-badges');
+        tb.innerHTML = (isPro ? '<span class="pro-pill">PRO EXCLUSIVE</span>' : '<span class="bg-amber-400 text-black text-xs font-bold px-3 py-1 rounded-full">TRAILER</span>') +
+            (item.genres||[]).map(g=>`<span class="genre-pill">${g}</span>`).join('');
+        document.getElementById('detail-title-kh').textContent = item.kh;
+        document.getElementById('detail-title-en').textContent = item.title;
+        document.getElementById('detail-desc').textContent = item.desc || '';
+    }
+
+    if (isMovie) {
+        currentMovieUrl = item.url;
+        // banner + poster
+        const banner = document.getElementById('detail-banner');
+        banner.style.backgroundImage = `url('${item.img}')`;
+        const poster = document.getElementById('detail-poster');
+        poster.src = item.img;
+        // badges + titles
+        const mb = document.getElementById('detail-movie-badges');
+        mb.innerHTML = (isPro ? '<span class="pro-pill">PRO EXCLUSIVE</span>' : '') +
+            `<span class="bg-zinc-800 text-zinc-300 text-xs font-bold px-3 py-1 rounded-full">${item.year||''}</span>` +
+            (item.runtime ? `<span class="bg-zinc-800 text-zinc-300 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>${item.runtime}</span>` : '') +
+            (item.genres||[]).map(g=>`<span class="genre-pill">${g}</span>`).join('');
+        document.getElementById('detail-movie-title-kh').textContent = item.kh;
+        document.getElementById('detail-movie-title-en').textContent = item.title;
+        document.getElementById('detail-movie-desc').textContent = item.desc || '';
+        // info grid
+        document.getElementById('ig-year').textContent = item.year||'—';
+        document.getElementById('ig-runtime').textContent = item.runtime||'—';
+        document.getElementById('ig-lang').textContent = 'Khmer';
+        document.getElementById('ig-rating').textContent = isPro ? 'PRO' : 'Free';
+        // cast
+        const castEl = document.getElementById('detail-cast');
+        castEl.innerHTML = (item.cast||[]).map(name=>{
+            const initials = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+            const colors = ['#6366f1','#8b5cf6','#ec4899','#f59e0b','#10b981','#3b82f6'];
+            const bg = colors[Math.floor(Math.random()*colors.length)];
+            return `<div class="cast-chip"><div class="cast-avatar" style="background:${bg};color:#fff">${initials}</div><div class="cast-name">${name}</div></div>`;
+        }).join('');
+        // watchlist btn
+        const wlAdded = state.inWatchlist;
+        document.getElementById('wl-icon').className = wlAdded ? 'fa-solid fa-check' : 'fa-solid fa-plus';
+        document.getElementById('wl-label').textContent = wlAdded ? 'In Watchlist' : 'Watchlist';
+        document.getElementById('detail-watchlist-btn').classList.toggle('added', wlAdded);
+        // more section title
+        document.getElementById('more-section-title').textContent = 'More Movies';
+    } else {
+        document.getElementById('more-section-title').textContent = 'More Trailers';
+    }
+
+    // like
+    const likeBtn = document.getElementById('detail-like-btn');
+    document.getElementById('detail-like-count').textContent = formatNum((item.likes||500) + (state.liked?1:0));
+    likeBtn.classList.toggle('liked', state.liked);
+
+    // views
+    document.getElementById('detail-views').textContent = formatNum(item.views||10000);
+
+    // stars
+    renderStars(state.userRating);
+    document.getElementById('rating-label').textContent = state.userRating ? '★ You rated: ' + ratingLabels[state.userRating] : 'Tap a star to rate';
+    document.getElementById('rating-label').style.color = state.userRating ? '#facc15' : '';
+
+    // comments
+    renderComments(state.comments);
+
+    // more items
+    buildMore(item);
+
+    // reset to rating tab
+    switchTab('rating');
+
+    // show page
+    document.getElementById('detail-page').classList.add('visible');
+    document.getElementById('detail-page').scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+    document.getElementById('detail-page').classList.remove('visible');
+    document.getElementById('detail-iframe').src = '';
+    document.body.style.overflow = '';
+    closeMovieVideo();
+}
+
+// ─── MOVIE VIDEO ───
+function playMovieVideo() {
+    document.getElementById('movie-video-frame').src = currentMovieUrl + '?autoplay=1';
+    document.getElementById('movie-video-overlay').classList.remove('hidden');
+}
+function closeMovieVideo() {
+    document.getElementById('movie-video-overlay').classList.add('hidden');
+    document.getElementById('movie-video-frame').src = '';
+}
+
+// ─── WATCHLIST ───
+function toggleWatchlist() {
+    const state = getState(currentItem.id);
+    state.inWatchlist = !state.inWatchlist;
+    const btn = document.getElementById('detail-watchlist-btn');
+    btn.classList.toggle('added', state.inWatchlist);
+    document.getElementById('wl-icon').className = state.inWatchlist ? 'fa-solid fa-check' : 'fa-solid fa-plus';
+    document.getElementById('wl-label').textContent = state.inWatchlist ? 'In Watchlist' : 'Watchlist';
+    showToast(state.inWatchlist ? '✅ Added to Watchlist' : 'Removed from Watchlist');
+}
+
+// ─── LIKE ───
+function toggleLike() {
+    const state = getState(currentItem.id);
+    state.liked = !state.liked;
+    const btn = document.getElementById('detail-like-btn');
+    btn.classList.toggle('liked', state.liked);
+    btn.classList.add('pop');
+    setTimeout(()=>btn.classList.remove('pop'), 400);
+    document.getElementById('detail-like-count').textContent = formatNum((currentItem.likes||500) + (state.liked?1:0));
+    showToast(state.liked ? '❤️ Added to your likes' : 'Removed from likes');
+}
+
+// ─── RATING ───
+const ratingLabels = ['','Poor','Fair','Good','Great','Amazing!'];
+function setRating(val) {
+    const state = getState(currentItem.id);
+    const wasNew = state.userRating === 0;
+    state.userRating = val;
+    renderStars(val);
+    const lbl = document.getElementById('rating-label');
+    lbl.textContent = '★ You rated: ' + ratingLabels[val];
+    lbl.style.color = '#facc15';
+    const base = 4.2;
+    const newAvg = wasNew ? ((base*128+val)/129).toFixed(1) : base;
+    document.getElementById('avg-score').textContent = newAvg;
+    document.getElementById('avg-fill').style.width = (parseFloat(newAvg)/5*100)+'%';
+    if (wasNew) document.getElementById('rating-count').textContent = '(129 ratings)';
+    showToast('⭐ Rated '+val+' star'+(val>1?'s':'')+' — '+ratingLabels[val]);
+}
+function hoverStar(val) {
+    document.querySelectorAll('#user-stars .star').forEach((s,i)=>{ s.style.color = i<val?'#facc15':'#3f3f46'; });
+}
+function resetHover() {
+    const state = getState(currentItem.id);
+    renderStars(state?state.userRating:0);
+}
+function renderStars(val) {
+    document.querySelectorAll('#user-stars .star').forEach((s,i)=>{ s.style.color = i<val?'#facc15':'#3f3f46'; });
+}
+
+// ─── TABS ───
+function switchTab(tab) {
+    currentTab = tab;
+    document.getElementById('tab-rating').classList.toggle('hidden', tab!=='rating');
+    document.getElementById('tab-comments').classList.toggle('hidden', tab!=='comments');
+    document.getElementById('tab-rating-btn').classList.toggle('active', tab==='rating');
+    document.getElementById('tab-comments-btn').classList.toggle('active', tab==='comments');
+}
+
+// ─── COMMENTS ───
+function submitComment() {
+    const txt = document.getElementById('new-comment-text').value.trim();
+    if (!txt) return;
+    const state = getState(currentItem.id);
+    state.comments.unshift({name:'You',initials:'ME',text:txt,ts:'Just now',likes:0,liked:false,isOwn:true});
+    document.getElementById('new-comment-text').value = '';
+    renderComments(state.comments);
+    showToast('💬 Comment posted!');
+}
+function renderComments(list) {
+    document.getElementById('comment-count-badge').textContent = '('+list.length+')';
+    document.getElementById('comments-list').innerHTML = list.map((c,idx)=>`
+        <div class="comment-card">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+                <div style="width:38px;height:38px;border-radius:50%;background:${c.isOwn?'linear-gradient(135deg,#facc15,#f59e0b)':'linear-gradient(135deg,#6366f1,#8b5cf6)'};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:${c.isOwn?'#000':'#fff'};flex-shrink:0">${c.initials}</div>
+                <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                        <span style="font-weight:700;font-size:14px;color:#fff">${c.name}</span>
+                        <span style="font-size:11px;color:#52525b">${c.ts}</span>
+                        ${c.isOwn?'<span style="background:#facc15;color:#000;font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px">You</span>':''}
+                    </div>
+                    <p style="font-size:14px;color:#d4d4d8;line-height:1.6;margin:0 0 8px">${escHtml(c.text)}</p>
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <button class="comment-like-btn ${c.liked?'active':''}" onclick="likeComment(${idx})"><i class="fa-${c.liked?'solid':'regular'} fa-heart"></i> ${c.likes}</button>
+                        <button class="comment-like-btn" onclick="replyComment(${idx})"><i class="fa-regular fa-comment"></i> Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>`).join('');
+}
+function likeComment(idx) {
+    const state = getState(currentItem.id);
+    const c = state.comments[idx];
+    c.liked=!c.liked; c.likes+=c.liked?1:-1;
+    renderComments(state.comments);
+}
+function replyComment(idx) {
+    const state = getState(currentItem.id);
+    const ta = document.getElementById('new-comment-text');
+    ta.value = '@'+state.comments[idx].name+' ';
+    switchTab('comments');
+    ta.focus();
+    ta.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// ─── MORE ITEMS ───
+function buildMore(current) {
+    const row = document.getElementById('more-items');
+    const pool = current.type==='movie'?movieData : current.type==='pro-movie'?proMovieData : current.type==='pro-trailer'?proTrailerData : trailerData;
+    row.innerHTML = '';
+    pool.filter(i=>i.id!==current.id).forEach(item=>{
+        const card = document.createElement('div');
+        card.className = 'movie-card min-w-[150px] md:min-w-[200px] cursor-pointer group';
+        const isPro = item.type==='pro-movie'||item.type==='pro-trailer';
+        card.innerHTML = `<div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
+            <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
+            ${isPro?'<div class="absolute top-2 left-2 bg-amber-400 text-black px-1.5 py-0.5 rounded text-[9px] font-bold">PRO</div>':''}
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-${item.type.includes('trailer')?'circle-play':'play'} text-4xl text-amber-400"></i></div>
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-3">
+                <div class="text-xs font-bold truncate">${item.kh}</div>
+                <div class="text-amber-400 text-[10px] truncate">${item.title}</div>
+            </div>
+        </div>`;
+        card.onclick = ()=>openDetail(item);
+        row.appendChild(card);
+    });
+}
+
+// ─── SHARE ───
+function handleShare() {
+    const msg = `🎬 ${currentItem.kh} — ${currentItem.title} on NagaFlix`;
+    if (navigator.share) { navigator.share({title:msg,url:window.location.href}); }
+    else { navigator.clipboard.writeText(window.location.href).then(()=>showToast('🔗 Link copied!')); }
+}
+
+// ─── HELPERS ───
+function show(id, visible) { document.getElementById(id).classList.toggle('hidden',!visible); }
+function formatNum(n) { return n>=1000?(n/1000).toFixed(1)+'k':n; }
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+let toastTimer;
+function showToast(msg) {
+    const t=document.getElementById('toast');
+    t.textContent=msg; t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// ─── POPULATE CARDS ───
+function populateContent() {
+    // trailers
+    const tRow = document.getElementById('trending-row');
+    trailerData.forEach(item=>{
+        const c=makeCard(item,'min-w-[200px] md:min-w-[280px]');
+        tRow.appendChild(c);
+    });
+    // full movies grid
+    const mRow = document.getElementById('movies-row');
+    movieData.forEach(item=>{
+        const c=makeCard(item,'');
+        mRow.appendChild(c);
+    });
+    // pro movies grid
+    const pmRow = document.getElementById('pro-movies-row');
+    proMovieData.forEach(item=>{
+        const c=makeProCard(item);
+        pmRow.appendChild(c);
+    });
+    // pro trailers row
+    const ptRow = document.getElementById('pro-trailers-row');
+    proTrailerData.forEach(item=>{
+        const c=makeProCard(item,'min-w-[200px] md:min-w-[280px]');
+        ptRow.appendChild(c);
+    });
+}
+
+function makeCard(item, extraClass='') {
+    const c=document.createElement('div');
+    c.className='movie-card cursor-pointer group '+(extraClass);
+    const isTrailer=item.type==='trailer';
+    c.innerHTML=`<div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
+        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
+        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-${isTrailer?'circle-play':'play'} text-5xl text-amber-400"></i></div>
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4">
+            <div class="text-sm font-bold truncate">${item.kh}</div>
+            <div class="flex justify-between items-center"><span class="text-amber-400 text-xs truncate">${item.title}</span>${item.year?`<span class="text-zinc-500 text-[10px] ml-1 shrink-0">${item.year}</span>`:''}</div>
+        </div>
+    </div>`;
+    c.onclick=()=>openDetail(item);
+    return c;
+}
+
+function makeProCard(item, extraClass='') {
+    const c=document.createElement('div');
+    c.className='movie-card cursor-pointer group '+(extraClass);
+    const isTrailer=item.type==='pro-trailer';
+    c.innerHTML=`<div class="relative rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 aspect-[2/3]">
+        <img src="${item.img}" class="w-full h-full object-cover transition-all group-hover:scale-110 opacity-80 group-hover:opacity-100">
+        <div class="absolute top-3 left-3 bg-amber-400 text-black px-2 py-0.5 rounded text-[10px] font-bold">${isTrailer?'PRO SNEAK':'PRO'}</div>
+        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-${isTrailer?'circle-play':'crown'} text-4xl text-amber-400"></i></div>
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-amber-400/20 via-black/80 to-transparent p-4">
+            <div class="text-sm font-bold truncate">${item.kh}</div>
+            <div class="flex justify-between items-center"><span class="text-amber-400 text-xs truncate">${item.title}</span>${item.year?`<span class="text-zinc-500 text-[10px] ml-1 shrink-0">${item.year}</span>`:''}</div>
+        </div>
+    </div>`;
+    c.onclick=()=>openDetail(item);
+    return c;
+}
+
+// ─── HERO AUTO CYCLE ───
+let currentHeroIndex=0, heroInterval;
+function startHeroAutoCycle() {
+    if(heroInterval) clearInterval(heroInterval);
+    heroInterval=setInterval(()=>reloadHero(true),8000);
+}
+function reloadHero(isAuto=false) {
+    currentHeroIndex=(currentHeroIndex+1)%trailerData.length;
+    const movie=trailerData[currentHeroIndex];
+    const bg=document.getElementById('hero-bg');
+    bg.style.opacity='.4';
+    setTimeout(()=>{
+        bg.style.backgroundImage=`url('${movie.img}')`;
+        document.getElementById('hero-title').textContent=movie.kh;
+        document.getElementById('hero-desc').textContent=`Discover "${movie.title}" — a cinematic journey on NagaFlix.`;
+        document.getElementById('hero-play-btn').onclick=()=>openDetail(movie);
+        bg.style.opacity='1';
+    },300);
+    if(!isAuto) startHeroAutoCycle();
+}
+
+// ─── SEARCH ───
+function handleSearch(q) {
+    q=q.toLowerCase();
+    document.querySelectorAll('.movie-card').forEach(card=>{
+        card.style.display=card.innerText.toLowerCase().includes(q)?'':'none';
+    });
+    if(q.length>0&&window.scrollY<300) window.scrollTo({top:400,behavior:'smooth'});
+}
+
+// ─── THEME ───
+function toggleTheme() {
+    const body=document.body, icon=document.getElementById('theme-icon');
+    if(body.classList.contains('light-theme')){body.classList.replace('light-theme','dark-theme');icon.classList.replace('fa-sun','fa-moon');localStorage.setItem('theme','dark');}
+    else{body.classList.replace('dark-theme','light-theme');icon.classList.replace('fa-moon','fa-sun');localStorage.setItem('theme','light');}
+}
+function initTheme() {
+    const saved=localStorage.getItem('theme');
+    const hour=new Date().getHours();
+    const theme=saved||((window.matchMedia('(prefers-color-scheme:dark)').matches||hour>=18||hour<6)?'dark':'light');
+    document.body.classList.add(theme+'-theme');
+    document.getElementById('theme-icon').classList.add(theme==='light'?'fa-sun':'fa-moon');
+}
+
+// ─── AUTH ───
+function openAuthModal(mode){document.getElementById('auth-modal').classList.remove('hidden');toggleAuthMode(mode);}
+function closeAuthModal(){document.getElementById('auth-modal').classList.add('hidden');}
+function toggleAuthMode(mode){document.getElementById('signin-form-container').classList.toggle('hidden',mode!=='signin');document.getElementById('signup-form-container').classList.toggle('hidden',mode!=='signup');}
+function handleAuthAction(e){e.preventDefault();document.getElementById('nav-signin-btn').classList.add('hidden');document.getElementById('nav-profile-ui').classList.remove('hidden');closeAuthModal();}
+function handleLogout(){document.getElementById('nav-signin-btn').classList.remove('hidden');document.getElementById('nav-profile-ui').classList.add('hidden');document.getElementById('profile-dropdown').classList.add('hidden');}
+function toggleProfileDropdown(){document.getElementById('profile-dropdown').classList.toggle('hidden');}
+function toggleMobileMenu(){const m=document.getElementById('mobile-menu'),i=document.getElementById('menu-icon');const h=m.classList.toggle('hidden');i.classList.toggle('fa-bars',h);i.classList.toggle('fa-xmark',!h);}
+
+// ─── INIT ───
+window.onload=()=>{
+    initTheme();
+    populateContent();
+    startHeroAutoCycle();
+    document.getElementById('hero-play-btn').onclick=()=>openDetail(trailerData[0]);
+};
+</script>
 </body>
 </html>
